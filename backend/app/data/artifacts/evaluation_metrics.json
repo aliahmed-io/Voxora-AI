@@ -1,0 +1,188 @@
+{
+  "metadata": {
+    "champion_model": "Linear Support Vector Classifier (Calibrated)",
+    "labels": [
+      "negative",
+      "neutral",
+      "positive"
+    ],
+    "features_count": 2474,
+    "dataset_size": 1555,
+    "train_samples": 1088,
+    "val_samples": 233,
+    "test_samples": 234,
+    "trained_at": "2026-10-28 10:16:35 UTC",
+    "hyperparameters": {
+      "logistic_regression": {
+        "C": 2.5,
+        "class_weight": "balanced",
+        "max_iter": 1000
+      },
+      "linear_svm": {
+        "C": 1.0,
+        "class_weight": "balanced",
+        "calibration": "sigmoid (cv=3)"
+      }
+    }
+  },
+  "champion": {
+    "model_name": "Linear Support Vector Classifier (Calibrated)",
+    "test_metrics": {
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1_score": 1.0,
+          "support": 77
+        },
+        "neutral": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1_score": 1.0,
+          "support": 72
+        },
+        "positive": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1_score": 1.0,
+          "support": 85
+        }
+      },
+      "confusion_matrix": [
+        [
+          77,
+          0,
+          0
+        ],
+        [
+          0,
+          72,
+          0
+        ],
+        [
+          0,
+          0,
+          85
+        ]
+      ],
+      "inference_latency_us": 8.8,
+      "train_time_ms": 35.17
+    }
+  },
+  "comparison": {
+    "Logistic Regression": {
+      "name": "Logistic Regression",
+      "val_macro_f1": 1.0,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1_score": 1.0,
+          "support": 77
+        },
+        "neutral": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1_score": 1.0,
+          "support": 72
+        },
+        "positive": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1_score": 1.0,
+          "support": 85
+        }
+      },
+      "confusion_matrix": [
+        [
+          77,
+          0,
+          0
+        ],
+        [
+          0,
+          72,
+          0
+        ],
+        [
+          0,
+          0,
+          85
+        ]
+      ],
+      "inference_latency_us": 0.0,
+      "train_time_ms": 20.95
+    },
+    "Linear Support Vector Classifier": {
+      "name": "Linear Support Vector Classifier (Calibrated)",
+      "val_macro_f1": 1.0,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "weighted_f1": 1.0,
+      "per_class": {
+        "negative": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1_score": 1.0,
+          "support": 77
+        },
+        "neutral": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1_score": 1.0,
+          "support": 72
+        },
+        "positive": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1_score": 1.0,
+          "support": 85
+        }
+      },
+      "confusion_matrix": [
+        [
+          77,
+          0,
+          0
+        ],
+        [
+          0,
+          72,
+          0
+        ],
+        [
+          0,
+          0,
+          85
+        ]
+      ],
+      "inference_latency_us": 8.8,
+      "train_time_ms": 35.17
+    }
+  },
+  "class_distribution": {
+    "positive": 564,
+    "negative": 511,
+    "neutral": 480
+  },
+  "labels_order": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "methodology": {
+    "feature_engineering": "Sublinear TF-IDF with (1, 2) n-grams preserving negations (not, never, no, cannot, etc.)",
+    "model_selection": "Stratified train (70%), validation (15%), untouched test (15%). Selection by Validation Macro-F1.",
+    "known_limitations": [
+      "Bag-of-words representation does not track long-range syntactic dependencies across distant paragraphs.",
+      "Sarcasm without explicit negation cues or contrastive adjectives may be misclassified.",
+      "Domain shifts outside customer review vernacular (e.g. medical or legal jargon) may decrease classification confidence."
+    ]
+  }
+}

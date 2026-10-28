@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  --voxora-primary: #6D4AFF;
+  --voxora-primary-hover: #5B39EE;
+  --voxora-primary-soft: #B6A4FF;
+  --voxora-primary-ghost: #ECE7FF;
+  --voxora-bg: #F5F2FF;
+  --voxora-card: #FFFFFF;
+  --voxora-ink: #161327;
+  --voxora-muted: #625D7E;
+  --voxora-subtle: #9B94B8;
+  --voxora-amber: #FFB86B;
+  --voxora-emerald: #10B981;
+  --voxora-rose: #F43F5E;
+}
+
+@layer base {
+  body {
+    background-color: #F5F2FF;
+    color: #161327;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+}
+
+/* Custom glow and backdrop effects */
+.voxora-glow {
+  box-shadow: 0 10px 30px -10px rgba(109, 74, 255, 0.25);
+}
+
+.voxora-card-shadow {
+  box-shadow: 0 4px 20px -2px rgba(109, 74, 255, 0.06), 0 2px 6px -1px rgba(22, 19, 39, 0.04);
+}
+
+.voxora-card-hover {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.voxora-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -4px rgba(109, 74, 255, 0.12), 0 4px 10px -2px rgba(22, 19, 39, 0.04);
+}
+
+/* Smooth custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5F2FF;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #B6A4FF;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6D4AFF;
+}

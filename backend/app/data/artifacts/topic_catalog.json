@@ -1,0 +1,342 @@
+[
+  {
+    "topic_id": 0,
+    "name": "Customer Support & Resolution",
+    "curated": true,
+    "curation_rationale": "Descriptive title mapped to dominant keyword cluster and business feedback domain.",
+    "keywords": [
+      {
+        "word": "time",
+        "weight": 0.8446
+      },
+      {
+        "word": "customer",
+        "weight": 0.7293
+      },
+      {
+        "word": "team",
+        "weight": 0.6366
+      },
+      {
+        "word": "fast",
+        "weight": 0.6331
+      },
+      {
+        "word": "support",
+        "weight": 0.5683
+      },
+      {
+        "word": "tier",
+        "weight": 0.5341
+      },
+      {
+        "word": "saved",
+        "weight": 0.5236
+      },
+      {
+        "word": "sentiment",
+        "weight": 0.4945
+      },
+      {
+        "word": "upgrade",
+        "weight": 0.4717
+      },
+      {
+        "word": "worth",
+        "weight": 0.4599
+      },
+      {
+        "word": "service",
+        "weight": 0.4326
+      },
+      {
+        "word": "blazing",
+        "weight": 0.4313
+      },
+      {
+        "word": "used",
+        "weight": 0.4307
+      },
+      {
+        "word": "incredible",
+        "weight": 0.4302
+      },
+      {
+        "word": "dashboard",
+        "weight": 0.4126
+      }
+    ]
+  },
+  {
+    "topic_id": 1,
+    "name": "Billing, Subscriptions & Invoicing",
+    "curated": true,
+    "curation_rationale": "Descriptive title mapped to dominant keyword cluster and business feedback domain.",
+    "keywords": [
+      {
+        "word": "features",
+        "weight": 0.567
+      },
+      {
+        "word": "slightly",
+        "weight": 0.5146
+      },
+      {
+        "word": "decent",
+        "weight": 0.4482
+      },
+      {
+        "word": "fine",
+        "weight": 0.3825
+      },
+      {
+        "word": "includes",
+        "weight": 0.3377
+      },
+      {
+        "word": "extra",
+        "weight": 0.3377
+      },
+      {
+        "word": "export",
+        "weight": 0.3377
+      },
+      {
+        "word": "require",
+        "weight": 0.3377
+      },
+      {
+        "word": "add",
+        "weight": 0.3377
+      },
+      {
+        "word": "price",
+        "weight": 0.3377
+      },
+      {
+        "word": "plan",
+        "weight": 0.33
+      },
+      {
+        "word": "color",
+        "weight": 0.3043
+      },
+      {
+        "word": "contrast",
+        "weight": 0.3043
+      },
+      {
+        "word": "sharper",
+        "weight": 0.3043
+      },
+      {
+        "word": "scheme",
+        "weight": 0.3043
+      }
+    ]
+  },
+  {
+    "topic_id": 2,
+    "name": "Platform Performance & System Stability",
+    "curated": true,
+    "curation_rationale": "Descriptive title mapped to dominant keyword cluster and business feedback domain.",
+    "keywords": [
+      {
+        "word": "broken",
+        "weight": 0.4015
+      },
+      {
+        "word": "slow",
+        "weight": 0.342
+      },
+      {
+        "word": "buttons",
+        "weight": 0.3168
+      },
+      {
+        "word": "unhelpful",
+        "weight": 0.2999
+      },
+      {
+        "word": "confusing",
+        "weight": 0.2806
+      },
+      {
+        "word": "worst",
+        "weight": 0.2689
+      },
+      {
+        "word": "support",
+        "weight": 0.2631
+      },
+      {
+        "word": "icons",
+        "weight": 0.2521
+      },
+      {
+        "word": "inconsistent",
+        "weight": 0.2521
+      },
+      {
+        "word": "tooltips",
+        "weight": 0.2521
+      },
+      {
+        "word": "navigation",
+        "weight": 0.2521
+      },
+      {
+        "word": "links",
+        "weight": 0.2521
+      },
+      {
+        "word": "poor",
+        "weight": 0.2521
+      },
+      {
+        "word": "receive",
+        "weight": 0.2428
+      },
+      {
+        "word": "generic",
+        "weight": 0.2428
+      }
+    ]
+  },
+  {
+    "topic_id": 3,
+    "name": "User Interface & Onboarding Experience",
+    "curated": true,
+    "curation_rationale": "Descriptive title mapped to dominant keyword cluster and business feedback domain.",
+    "keywords": [
+      {
+        "word": "arrived",
+        "weight": 0.7625
+      },
+      {
+        "word": "item",
+        "weight": 0.6501
+      },
+      {
+        "word": "protective",
+        "weight": 0.4532
+      },
+      {
+        "word": "bubble",
+        "weight": 0.4389
+      },
+      {
+        "word": "wrap",
+        "weight": 0.4389
+      },
+      {
+        "word": "package",
+        "weight": 0.3922
+      },
+      {
+        "word": "inside",
+        "weight": 0.3888
+      },
+      {
+        "word": "cracked",
+        "weight": 0.3772
+      },
+      {
+        "word": "shipped",
+        "weight": 0.3772
+      },
+      {
+        "word": "envelope",
+        "weight": 0.3772
+      },
+      {
+        "word": "half",
+        "weight": 0.3772
+      },
+      {
+        "word": "flimsy",
+        "weight": 0.3772
+      },
+      {
+        "word": "paper",
+        "weight": 0.3772
+      },
+      {
+        "word": "days",
+        "weight": 0.2862
+      },
+      {
+        "word": "box",
+        "weight": 0.2459
+      }
+    ]
+  },
+  {
+    "topic_id": 4,
+    "name": "Shipping, Packaging & Fulfillment",
+    "curated": true,
+    "curation_rationale": "Descriptive title mapped to dominant keyword cluster and business feedback domain.",
+    "keywords": [
+      {
+        "word": "core",
+        "weight": 0.4142
+      },
+      {
+        "word": "agent",
+        "weight": 0.3308
+      },
+      {
+        "word": "glitches",
+        "weight": 0.297
+      },
+      {
+        "word": "operates",
+        "weight": 0.297
+      },
+      {
+        "word": "functionality",
+        "weight": 0.297
+      },
+      {
+        "word": "safari",
+        "weight": 0.297
+      },
+      {
+        "word": "normally",
+        "weight": 0.297
+      },
+      {
+        "word": "analysis",
+        "weight": 0.297
+      },
+      {
+        "word": "stable",
+        "weight": 0.2898
+      },
+      {
+        "word": "minor",
+        "weight": 0.285
+      },
+      {
+        "word": "help",
+        "weight": 0.2721
+      },
+      {
+        "word": "visual",
+        "weight": 0.2548
+      },
+      {
+        "word": "ticket",
+        "weight": 0.2416
+      },
+      {
+        "word": "answered",
+        "weight": 0.2405
+      },
+      {
+        "word": "closed",
+        "weight": 0.2361
+      }
+    ]
+  }
+]

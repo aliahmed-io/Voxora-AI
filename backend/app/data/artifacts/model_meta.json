@@ -1,0 +1,26 @@
+{
+  "champion_model": "Linear Support Vector Classifier (Calibrated)",
+  "labels": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "features_count": 2474,
+  "dataset_size": 1555,
+  "train_samples": 1088,
+  "val_samples": 233,
+  "test_samples": 234,
+  "trained_at": "2026-10-28 10:16:35 UTC",
+  "hyperparameters": {
+    "logistic_regression": {
+      "C": 2.5,
+      "class_weight": "balanced",
+      "max_iter": 1000
+    },
+    "linear_svm": {
+      "C": 1.0,
+      "class_weight": "balanced",
+      "calibration": "sigmoid (cv=3)"
+    }
+  }
+}
