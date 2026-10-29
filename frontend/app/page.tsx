@@ -11,6 +11,8 @@ import {
   Lock,
 } from "lucide-react";
 
+import { Logo } from "@/components/layout/Logo";
+
 export default function LandingPage() {
   const [interactiveInput, setInteractiveInput] = useState(
     "The application is blazing fast, beautiful UI, and support was incredible!"
@@ -57,15 +59,10 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-[#F5F2FF] text-[#161327] flex flex-col font-sans selection:bg-[#6D4AFF]/20">
       {/* Top Header */}
-      <header className="h-20 border-b border-[#6D4AFF]/10 bg-white/70 backdrop-blur-md px-8 flex items-center justify-between sticky top-0 z-50">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#6D4AFF] to-[#B6A4FF] flex items-center justify-center text-white shadow-lg shadow-[#6D4AFF]/25">
-            <Sparkles className="w-5 h-5" />
-          </div>
-          <span className="font-extrabold text-xl tracking-tight text-[#161327]">
-            Voxora AI
-          </span>
-        </div>
+      <header className="h-20 border-b border-[#ECE8F8] bg-white/80 backdrop-blur-md px-8 flex items-center justify-between sticky top-0 z-50">
+        <Link href="/" className="group">
+          <Logo size="lg" />
+        </Link>
 
         <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-[#625D7E]">
           <Link href="/dashboard" className="hover:text-[#6D4AFF] transition-colors">
@@ -324,11 +321,9 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="mt-auto py-8 px-8 border-t border-[#6D4AFF]/10 bg-white text-xs text-[#625D7E] flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-lg bg-[#6D4AFF] text-white flex items-center justify-center font-bold text-[10px]">
-            V
-          </div>
+      <footer className="mt-auto py-8 px-8 border-t border-[#ECE8F8] bg-white text-xs text-[#625D7E] flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <Logo size="sm" showText={false} />
           <span className="font-bold text-[#161327]">Voxora AI</span>
           <span>&bull; Computer Science Senior Project</span>
         </div>

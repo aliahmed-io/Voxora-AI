@@ -2,12 +2,21 @@ import React from "react";
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { SentimentGauge } from "@/components/dashboard/SentimentGauge";
+import { StatRibbon } from "@/components/dashboard/StatRibbon";
 import { HighlightsCard } from "@/components/dashboard/HighlightsCard";
 import { ChannelDistribution } from "@/components/dashboard/ChannelDistribution";
 import { ConfusionMatrixGrid } from "@/components/model/ConfusionMatrixGrid";
+import { Logo } from "@/components/layout/Logo";
 
-describe("Dashboard Components", () => {
-  it("renders SentimentGauge with CSAT score and percentages", () => {
+describe("Dashboard Components & Custom Logo", () => {
+  it("renders custom SVG Logo component with trademark geometric mark", () => {
+    const { container } = render(<Logo size="md" />);
+    expect(screen.getByText("Voxora")).toBeInTheDocument();
+    expect(screen.getByText("AI")).toBeInTheDocument();
+    expect(container.querySelector("svg")).toBeInTheDocument();
+  });
+
+  it("renders SentimentGauge with CSAT score, breakdown bars and stat cards", () => {
     render(
       <SentimentGauge
         score={87}
@@ -20,11 +29,36 @@ describe("Dashboard Components", () => {
       />
     );
 
-    expect(screen.getByText("Customer Sentiment Score")).toBeInTheDocument();
+    expect(screen.getByText("Global Overview")).toBeInTheDocument();
     expect(screen.getByText("87")).toBeInTheDocument();
-    expect(screen.getByText("/ 100")).toBeInTheDocument();
+    expect(screen.getByText("/100")).toBeInTheDocument();
     expect(screen.getByText("Positive")).toBeInTheDocument();
     expect(screen.getByText("800 (80%)")).toBeInTheDocument();
+    expect(screen.getByText("Top Pain Point")).toBeInTheDocument();
+    expect(screen.getByText("Top Opportunity")).toBeInTheDocument();
+  });
+
+  it("renders StatRibbon with 6 top metrics", () => {
+    render(
+      <StatRibbon
+        totalReviews={3842}
+        positiveCount={2156}
+        neutralCount={874}
+        negativeCount={1248}
+        csatScore={87}
+        analyzedCount={2876}
+      />
+    );
+
+    expect(screen.getByText("Total Reviews")).toBeInTheDocument();
+    expect(screen.getByText("3,842")).toBeInTheDocument();
+    expect(screen.getByText("Positive Feedback")).toBeInTheDocument();
+    expect(screen.getByText("2,156")).toBeInTheDocument();
+    expect(screen.getByText("Neutral Feedback")).toBeInTheDocument();
+    expect(screen.getByText("Negative Issues")).toBeInTheDocument();
+    expect(screen.getByText("CSAT Score")).toBeInTheDocument();
+    expect(screen.getByText("Reviews Analyzed")).toBeInTheDocument();
+    expect(screen.getByText("2,876")).toBeInTheDocument();
   });
 
   it("renders HighlightsCard with editorial findings", () => {
