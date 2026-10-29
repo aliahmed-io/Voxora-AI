@@ -81,7 +81,7 @@ export default function ReviewsPage() {
   }, [activeDatasetId, sentiment, topic, search, page]);
 
   return (
-    <div className="flex min-h-screen bg-[#F5F2FF]">
+    <div className="flex min-h-screen bg-[#FAF4F9] text-[#400849]">
       <Sidebar />
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -95,13 +95,13 @@ export default function ReviewsPage() {
 
         <main className="flex-1 p-6 md:p-8 space-y-6 max-w-7xl mx-auto w-full">
           <div>
-            <span className="text-xs font-bold text-[#6D4AFF] uppercase tracking-wider">
+            <span className="text-xs font-bold text-[#FF5A0A] uppercase tracking-wider">
               Feedback Forensics
             </span>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#161327] tracking-tight mt-1">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#400849] tracking-tight mt-1">
               Review Explorer & Token Attribution
             </h1>
-            <p className="text-xs text-[#625D7E] mt-1">
+            <p className="text-xs text-[#71367B] mt-1">
               Search, filter, and inspect individual customer records. View exact linear feature attributions.
             </p>
           </div>

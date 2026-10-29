@@ -9,6 +9,7 @@ import { SentimentGauge } from "@/components/dashboard/SentimentGauge";
 import { SentimentMap } from "@/components/dashboard/SentimentMap";
 import { TimeSeriesChart } from "@/components/dashboard/TimeSeriesChart";
 import { InsightsByCategory } from "@/components/dashboard/InsightsByCategory";
+import { TopicRadarChart } from "@/components/dashboard/TopicRadarChart";
 import { LatestInsights } from "@/components/dashboard/LatestInsights";
 import { RecentFeedback } from "@/components/dashboard/RecentFeedback";
 import { api } from "@/lib/api";
@@ -19,6 +20,7 @@ export default function DashboardPage() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [topicVizMode, setTopicVizMode] = useState<"bars" | "radar">("radar");
 
   useEffect(() => {
     let ignore = false;
@@ -56,7 +58,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#FBF3F9] text-[#400849]">
+    <div className="flex min-h-screen bg-[#FAF4F9] text-[#400849]">
       <Sidebar />
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -121,18 +123,26 @@ export default function DashboardPage() {
                   />
                 </div>
 
-                {/* Middle Column: Customer Sentiment Map + TimeSeries & Categories (6 cols) */}
+                {/* Middle Column: Customer Sentiment Map + TimeSeries & Categories / Radar (6 cols) */}
                 <div className="xl:col-span-6 space-y-5">
                   <SentimentMap points={stats.sentiment_map} />
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch">
                     <TimeSeriesChart data={stats.trend} />
-                    <InsightsByCategory
-                      categories={stats.topics.map((t) => ({
-                        name: t.name,
-                        percentage: Math.round(t.percentage),
-                      }))}
-                    />
+
+                    <div>
+                      {topicVizMode === "radar" ? (
+                        <TopicRadarChart onSwitchMode={() => setTopicVizMode("bars")} />
+                      ) : (
+                        <InsightsByCategory
+                          onSwitchMode={() => setTopicVizMode("radar")}
+                          categories={stats.topics.map((t) => ({
+                            name: t.name,
+                            percentage: Math.round(t.percentage),
+                          }))}
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
 

@@ -9,28 +9,28 @@ export function RecentFeedback() {
     {
       name: "Sarah Chen",
       role: "Head of Product",
-      date: "May 30, 2025",
+      date: "May 30",
       avatarBg: "from-[#400849] to-[#631A70]",
       initials: "SC",
     },
     {
       name: "Michael Rodriguez",
-      role: "Product Manager",
-      date: "May 28, 2025",
+      role: "Product Lead",
+      date: "May 28",
       avatarBg: "from-[#FF5A0A] to-[#FF7A38]",
       initials: "MR",
     },
     {
       name: "Priya Patel",
       role: "Customer Success",
-      date: "May 27, 2025",
+      date: "May 27",
       avatarBg: "from-[#631A70] to-[#E7B0DE]",
       initials: "PP",
     },
     {
       name: "David Kim",
       role: "Founder & CEO",
-      date: "May 25, 2025",
+      date: "May 25",
       avatarBg: "from-[#400849] to-[#FF5A0A]",
       initials: "DK",
     },
@@ -40,7 +40,7 @@ export function RecentFeedback() {
     <div className="p-5 rounded-3xl bg-white border border-[#E7B0DE]/40 shadow-sm flex flex-col justify-between">
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-xs font-black text-[#400849] tracking-tight">
-          Recent Reviews
+          Recent Reviewers
         </h2>
         <Link
           href="/reviews"
@@ -50,12 +50,12 @@ export function RecentFeedback() {
         </Link>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-2">
         {users.map((u) => (
           <Link
             key={u.name}
             href="/reviews"
-            className="flex items-center justify-between p-1.5 rounded-xl hover:bg-[#FAF0F8] transition-colors group"
+            className="flex items-center justify-between p-2 rounded-xl hover:bg-[#FAF0F8] transition-colors group"
           >
             <div className="flex items-center gap-2.5 min-w-0">
               <div
@@ -64,7 +64,7 @@ export function RecentFeedback() {
                 {u.initials}
               </div>
               <div className="min-w-0">
-                <span className="text-xs font-bold text-[#400849] group-hover:text-[#FF5A0A] transition-colors block truncate">
+                <span className="text-xs font-bold text-[#400849] group-hover:text-[#FF5A0A] transition-colors block leading-tight">
                   {u.name}
                 </span>
                 <span className="text-[10px] text-[#A872AF] block truncate">
@@ -73,10 +73,10 @@ export function RecentFeedback() {
               </div>
             </div>
 
-            <div className="flex items-center gap-1.5 shrink-0">
-              <span className="text-[10px] text-[#A872AF] font-medium">{u.date}</span>
-              <div className="w-5 h-5 rounded-full bg-[#FFF2EC] text-[#FF5A0A] flex items-center justify-center group-hover:bg-[#FF5A0A] group-hover:text-white transition-colors shadow-2xs">
-                <ChevronRight className="w-3 h-3" />
+            <div className="flex items-center gap-2 shrink-0 ml-2">
+              <span className="text-[10px] text-[#A872AF] font-semibold">{u.date}</span>
+              <div className="w-5 h-5 rounded-full bg-[#FFF2EC] text-[#FF5A0A] flex items-center justify-center group-hover:bg-[#FF5A0A] group-hover:text-white transition-colors">
+                <ChevronRight className="w-3 h-3 stroke-[2.5]" />
               </div>
             </div>
           </Link>

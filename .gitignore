@@ -26,3 +26,4 @@ frontend/.pnpm-store/
 # Operating System
 .DS_Store
 Thumbs.db
+*.png

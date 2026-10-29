@@ -60,7 +60,7 @@ export default function ReportsPage() {
   }, [activeDatasetId]);
 
   return (
-    <div className="flex min-h-screen bg-[#F5F2FF]">
+    <div className="flex min-h-screen bg-[#FAF4F9] text-[#400849]">
       <Sidebar />
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -73,13 +73,13 @@ export default function ReportsPage() {
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <span className="text-xs font-bold text-[#6D4AFF] uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#FF5A0A] uppercase tracking-wider">
                 Intelligence Artifacts
               </span>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#161327] tracking-tight mt-1">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#400849] tracking-tight mt-1">
                 Executive Reports & Data Export
               </h1>
-              <p className="text-xs text-[#625D7E] mt-1">
+              <p className="text-xs text-[#71367B] mt-1">
                 Download publication-ready executive PDF summaries or export enriched customer reviews as CSV.
               </p>
             </div>
@@ -89,18 +89,18 @@ export default function ReportsPage() {
                 <a
                   href={api.getCsvExportUrl(activeDatasetId)}
                   download
-                  className="px-4 py-2.5 rounded-xl border border-[#6D4AFF]/20 bg-white hover:bg-[#FAF8FF] text-xs font-semibold text-[#161327] transition-all flex items-center gap-2 shadow-sm"
+                  className="px-4 py-2.5 rounded-xl border border-[#E7B0DE]/60 bg-white hover:bg-[#FAF0F8] text-xs font-bold text-[#400849] transition-all flex items-center gap-2 shadow-xs"
                 >
-                  <FileSpreadsheet className="w-4 h-4 text-[#6D4AFF]" />
+                  <FileSpreadsheet className="w-4 h-4 text-[#FF5A0A]" />
                   <span>Export CSV</span>
                 </a>
 
                 <a
                   href={api.getPdfReportUrl(activeDatasetId)}
                   download
-                  className="px-5 py-2.5 rounded-xl bg-[#6D4AFF] hover:bg-[#5B39EE] text-white text-xs font-bold shadow-md shadow-[#6D4AFF]/25 transition-all flex items-center gap-2"
+                  className="px-5 py-2.5 rounded-xl bg-[#FF5A0A] hover:bg-[#E04D05] text-white text-xs font-extrabold shadow-md shadow-[#FF5A0A]/25 transition-all flex items-center gap-2"
                 >
-                  <Download className="w-4 h-4" />
+                  <Download className="w-4 h-4 stroke-[2.5]" />
                   <span>Download PDF Report</span>
                 </a>
               </div>
@@ -108,24 +108,24 @@ export default function ReportsPage() {
           </div>
 
           {/* AI Executive Synthesis Section (Gemini / Audited Local) */}
-          <div className="p-6 rounded-3xl bg-white border border-[#6D4AFF]/15 shadow-sm space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-[#ECE7FF]">
-              <div className="flex items-center gap-2.5 text-xs font-bold text-[#6D4AFF]">
-                <Brain className="w-4 h-4" />
+          <div className="p-6 rounded-3xl bg-white border border-[#E7B0DE]/40 shadow-sm space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E7B0DE]/30">
+              <div className="flex items-center gap-2.5 text-xs font-black text-[#400849]">
+                <Brain className="w-4 h-4 text-[#FF5A0A]" />
                 <span>Executive Strategic Synthesis</span>
               </div>
-              <span className="text-[11px] font-semibold text-[#10B981] bg-[#10B981]/10 px-2.5 py-0.5 rounded-full">
+              <span className="text-[10px] font-black text-[#10B981] bg-[#ECFDF5] px-2.5 py-0.5 rounded-full border border-[#10B981]/20">
                 {aiSynthesis ? aiSynthesis.provider : "Loading AI Insights..."}
               </span>
             </div>
 
             {loadingAi ? (
-              <div className="py-8 text-center text-xs text-[#625D7E] animate-pulse">
+              <div className="py-8 text-center text-xs font-bold text-[#71367B] animate-pulse">
                 Synthesizing strategic customer takeaways...
               </div>
             ) : aiSynthesis ? (
               <div className="space-y-4 text-xs leading-relaxed">
-                <div className="p-4 rounded-2xl bg-[#FAF8FF] border border-[#ECE7FF] text-[#161327]">
+                <div className="p-4 rounded-2xl bg-[#FAF0F8] border border-[#E7B0DE]/40 text-[#400849]">
                   <p className="whitespace-pre-line font-medium leading-relaxed">
                     {aiSynthesis.executive_summary}
                   </p>
@@ -133,10 +133,10 @@ export default function ReportsPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="p-4 rounded-2xl bg-white border border-[#10B981]/20">
-                    <span className="text-xs font-bold text-[#10B981] block mb-2">
+                    <span className="text-xs font-black text-[#10B981] block mb-2">
                       Key Organizational Strengths
                     </span>
-                    <ul className="space-y-1.5 text-[#161327]">
+                    <ul className="space-y-1.5 text-[#400849] font-medium">
                       {aiSynthesis.key_strengths.map((str, i) => (
                         <li key={i} className="flex items-start gap-2">
                           <CheckCircle2 className="w-3.5 h-3.5 text-[#10B981] shrink-0 mt-0.5" />
@@ -146,14 +146,14 @@ export default function ReportsPage() {
                     </ul>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-white border border-[#F43F5E]/20">
-                    <span className="text-xs font-bold text-[#F43F5E] block mb-2">
+                  <div className="p-4 rounded-2xl bg-white border border-[#E11D48]/20">
+                    <span className="text-xs font-black text-[#E11D48] block mb-2">
                       Urgent Friction Remediations
                     </span>
-                    <ul className="space-y-1.5 text-[#161327]">
+                    <ul className="space-y-1.5 text-[#400849] font-medium">
                       {aiSynthesis.urgent_interventions.map((intv, i) => (
                         <li key={i} className="flex items-start gap-2">
-                          <AlertCircle className="w-3.5 h-3.5 text-[#F43F5E] shrink-0 mt-0.5" />
+                          <AlertCircle className="w-3.5 h-3.5 text-[#E11D48] shrink-0 mt-0.5" />
                           <span>{intv}</span>
                         </li>
                       ))}
@@ -161,9 +161,9 @@ export default function ReportsPage() {
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-[#ECE7FF]/60 border border-[#6D4AFF]/15 text-[#161327] flex items-center justify-between">
-                  <span className="font-bold text-[#6D4AFF]">Quarterly Strategic Priority:</span>
-                  <span className="font-semibold text-right max-w-md">
+                <div className="p-3.5 rounded-2xl bg-[#FFF2EC] border border-[#FF5A0A]/20 text-[#400849] flex items-center justify-between">
+                  <span className="font-black text-[#FF5A0A]">Quarterly Strategic Priority:</span>
+                  <span className="font-bold text-right max-w-md">
                     {aiSynthesis.quarterly_recommendation}
                   </span>
                 </div>
@@ -173,86 +173,86 @@ export default function ReportsPage() {
 
           {/* Report Preview Document */}
           {stats && (
-            <div className="p-8 rounded-3xl bg-white border border-[#6D4AFF]/15 shadow-xl space-y-6">
-              <div className="flex items-center justify-between pb-4 border-b border-[#ECE7FF]">
+            <div className="p-8 rounded-3xl bg-white border border-[#E7B0DE]/40 shadow-sm space-y-6">
+              <div className="flex items-center justify-between pb-4 border-b border-[#E7B0DE]/30">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#6D4AFF] text-white flex items-center justify-center font-extrabold text-sm shadow-md shadow-[#6D4AFF]/25">
+                  <div className="w-10 h-10 rounded-xl bg-[#400849] text-[#FF5A0A] flex items-center justify-center font-black text-sm shadow-xs">
                     <FileText className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-extrabold text-[#161327]">
+                    <h3 className="text-base font-black text-[#400849]">
                       Voxora AI Intelligence Summary
                     </h3>
-                    <p className="text-xs text-[#625D7E]">
+                    <p className="text-xs text-[#71367B]">
                       Dataset: {stats.dataset_name} &bull; Generated from verified ML inference
                     </p>
                   </div>
                 </div>
 
-                <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#10B981]/15 text-[#10B981]">
+                <span className="text-xs font-black px-3 py-1 rounded-full bg-[#ECFDF5] text-[#10B981] border border-[#10B981]/20">
                   Official Document
                 </span>
               </div>
 
               {/* KPI Grid */}
-              <div className="grid grid-cols-3 gap-4 p-4 rounded-2xl bg-[#FAF8FF] border border-[#ECE7FF] text-center">
+              <div className="grid grid-cols-3 gap-4 p-4 rounded-2xl bg-[#FAF0F8] border border-[#E7B0DE]/40 text-center">
                 <div>
-                  <span className="text-[10px] text-[#9B94B8] font-bold uppercase block">
+                  <span className="text-[10px] text-[#A872AF] font-bold uppercase block">
                     Customer Sentiment Score
                   </span>
-                  <span className="text-2xl font-extrabold text-[#6D4AFF]">
+                  <span className="text-2xl font-black text-[#400849]">
                     {stats.sentiment_score} / 100
                   </span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-[#9B94B8] font-bold uppercase block">
+                  <span className="text-[10px] text-[#A872AF] font-bold uppercase block">
                     Total Volume
                   </span>
-                  <span className="text-2xl font-extrabold text-[#161327]">
+                  <span className="text-2xl font-black text-[#400849]">
                     {stats.total_reviews.toLocaleString()}
                   </span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-[#9B94B8] font-bold uppercase block">
+                  <span className="text-[10px] text-[#A872AF] font-bold uppercase block">
                     Sentiment Health
                   </span>
                   <span className="text-xs font-bold mt-1 block">
                     <span className="text-[#10B981]">{stats.percentages.positive}% Pos</span> &bull;{" "}
-                    <span className="text-[#F43F5E]">{stats.percentages.negative}% Neg</span>
+                    <span className="text-[#400849]">{stats.percentages.negative}% Neg</span>
                   </span>
                 </div>
               </div>
 
               {/* Topics Breakdown Table */}
               <div>
-                <h4 className="text-xs font-bold text-[#161327] uppercase tracking-wider mb-2">
+                <h4 className="text-xs font-black text-[#400849] uppercase tracking-wider mb-2">
                   Discovered Topic Clusters & Dominant Keywords
                 </h4>
-                <div className="overflow-x-auto rounded-xl border border-[#ECE7FF]">
+                <div className="overflow-x-auto rounded-2xl border border-[#E7B0DE]/40">
                   <table className="w-full text-left border-collapse text-xs">
                     <thead>
-                      <tr className="bg-[#FAF8FF] text-[#9B94B8] font-bold text-[10px] uppercase border-b border-[#ECE7FF]">
+                      <tr className="bg-[#FAF0F8] text-[#A872AF] font-bold text-[10px] uppercase border-b border-[#E7B0DE]/40">
                         <th className="p-3">Topic</th>
                         <th className="p-3">Share</th>
                         <th className="p-3">Sentiment Split</th>
                         <th className="p-3">Keywords</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-[#ECE7FF]/60 font-medium">
+                    <tbody className="divide-y divide-[#E7B0DE]/30 font-medium">
                       {stats.topics.map((t) => (
                         <tr key={t.topic_id}>
-                          <td className="p-3 font-bold text-[#161327]">{t.name}</td>
-                          <td className="p-3">{t.percentage}%</td>
+                          <td className="p-3 font-bold text-[#400849]">{t.name}</td>
+                          <td className="p-3 font-bold">{t.percentage}%</td>
                           <td className="p-3">
                             <span className="text-[#10B981] font-bold">
                               {t.sentiment_distribution.positive} pos
                             </span>{" "}
                             /{" "}
-                            <span className="text-[#F43F5E] font-bold">
+                            <span className="text-[#E11D48] font-bold">
                               {t.sentiment_distribution.negative} neg
                             </span>
                           </td>
-                          <td className="p-3 text-[#625D7E]">
+                          <td className="p-3 text-[#71367B]">
                             {t.top_keywords.slice(0, 4).join(", ")}
                           </td>
                         </tr>
@@ -263,8 +263,8 @@ export default function ReportsPage() {
               </div>
 
               {/* Methodology & Ethical Guarantee */}
-              <div className="p-4 rounded-xl bg-[#FAF8FF] border border-[#ECE7FF] text-xs text-[#625D7E] space-y-1">
-                <span className="font-bold text-[#161327]">Report Methodology & Governance: </span>
+              <div className="p-4 rounded-2xl bg-[#FAF0F8] border border-[#E7B0DE]/40 text-xs text-[#71367B] space-y-1">
+                <span className="font-bold text-[#400849]">Report Methodology & Governance: </span>
                 <p>
                   Classifications generated by scikit-learn Linear Support Vector Machine with Platt scaling calibration.
                   Features extracted using sublinear TF-IDF (1, 2) n-grams preserving natural language negations.
