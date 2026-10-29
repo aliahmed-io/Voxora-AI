@@ -10,83 +10,79 @@ interface LogoProps {
 
 export function Logo({ className = "", size = "md", showText = true }: LogoProps) {
   const dimensions = {
-    sm: { icon: 28, text: "text-base", badge: "text-[9px] px-1.5 py-0.5" },
-    md: { icon: 36, text: "text-xl", badge: "text-[10px] px-2 py-0.5" },
-    lg: { icon: 46, text: "text-2xl", badge: "text-xs px-2.5 py-0.5" },
+    sm: {
+      tile: "w-7 h-7 rounded-lg",
+      svg: 18,
+      text: "text-base",
+      badge: "text-[9px] px-1.5 py-0.5",
+    },
+    md: {
+      tile: "w-9 h-9 rounded-xl",
+      svg: 22,
+      text: "text-lg",
+      badge: "text-[9.5px] px-1.5 py-0.5",
+    },
+    lg: {
+      tile: "w-11 h-11 rounded-2xl",
+      svg: 28,
+      text: "text-2xl",
+      badge: "text-xs px-2 py-0.5",
+    },
   }[size];
 
   return (
     <div className={`flex items-center gap-2.5 select-none ${className}`}>
-      {/* Precision Vector Acoustic V-Prism Brandmark */}
+      {/* Pristine Brand Icon Squircle Tile */}
       <div
-        className="relative shrink-0 flex items-center justify-center transition-transform duration-300 hover:scale-105"
-        style={{ width: dimensions.icon, height: dimensions.icon }}
+        className={`${dimensions.tile} bg-gradient-to-br from-[#2D0637] via-[#24042C] to-[#17021C] border border-[#E7B0DE]/25 flex items-center justify-center shrink-0 shadow-[0_4px_16px_rgba(40,8,73,0.18)] transition-transform duration-200 hover:scale-105`}
       >
         <svg
-          viewBox="0 0 44 44"
+          viewBox="0 0 28 28"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-full drop-shadow-[0_4px_12px_rgba(64,8,73,0.15)]"
+          style={{ width: dimensions.svg, height: dimensions.svg }}
+          className="overflow-visible"
         >
           <defs>
-            {/* Deep Eggplant Structural Vector Gradient */}
-            <linearGradient id="vx-eggplant" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#25032D" />
-              <stop offset="60%" stopColor="#400849" />
-              <stop offset="100%" stopColor="#5E126B" />
-            </linearGradient>
-
-            {/* Signal Orange Luminous Blade Gradient */}
-            <linearGradient id="vx-orange" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#E04000" />
-              <stop offset="60%" stopColor="#FF5A0A" />
+            {/* Luminous Acoustic Vector Gradient (Orchid -> Signal Orange) */}
+            <linearGradient id="vx-wave-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#E7B0DE" />
+              <stop offset="45%" stopColor="#C968B8" />
+              <stop offset="75%" stopColor="#FF5A0A" />
               <stop offset="100%" stopColor="#FFA153" />
             </linearGradient>
 
-            {/* Pastel Orchid Acoustic Nexus Gradient */}
-            <linearGradient id="vx-orchid" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#5E126B" />
-              <stop offset="50%" stopColor="#E7B0DE" />
-              <stop offset="100%" stopColor="#FFA153" />
-            </linearGradient>
-
-            {/* Ambient Backing Glow */}
-            <radialGradient id="vx-glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#FF5A0A" stopOpacity="0.25" />
-              <stop offset="100%" stopColor="#400849" stopOpacity="0" />
-            </radialGradient>
+            {/* Specular Apex Glow */}
+            <filter id="vx-apex-glow" x="-30%" y="-30%" width="160%" height="160%">
+              <feDropShadow dx="0" dy="1" stdDeviation="2" floodColor="#FF5A0A" floodOpacity="0.5" />
+            </filter>
           </defs>
 
-          {/* Ambient Glow Aura */}
-          <circle cx="22" cy="22" r="20" fill="url(#vx-glow)" />
+          {/* Background Ambient Radial Pulse */}
+          <circle cx="14" cy="14" r="10" fill="#FF5A0A" opacity="0.12" />
 
-          {/* Left Facet: Deep Obsidian Eggplant Column (Leaning forward at 24 deg) */}
+          {/* Primary Precision Letterform "V" (Continuous Silk Stroke) */}
           <path
-            d="M 9 9 C 9 6.79 10.79 5 13 5 L 15.5 5 C 17.15 5 18.6 6.01 19.16 7.56 L 24.2 21.5 L 18.4 24.8 L 10.16 11.24 C 9.42 10.59 9 9.8 9 9 Z"
-            fill="url(#vx-eggplant)"
+            d="M 6.5 8 L 14 21.5 L 21.5 8"
+            stroke="url(#vx-wave-grad)"
+            strokeWidth="3.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            filter="url(#vx-apex-glow)"
           />
 
-          {/* Right Facet: High-Voltage Signal Orange Blade */}
+          {/* Concentric Acoustic Resonance Core (Voice Frequency Arc) */}
           <path
-            d="M 35 9 C 35 6.79 33.21 5 31 5 L 28.5 5 C 26.85 5 25.4 6.01 24.84 7.56 L 19.8 21.5 L 25.6 24.8 L 33.84 11.24 C 34.58 10.59 35 9.8 35 9 Z"
-            fill="url(#vx-orange)"
+            d="M 10 10.5 L 14 17.5 L 18 10.5"
+            stroke="#FFFFFF"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            opacity="0.85"
           />
 
-          {/* Base Apex Harmonic Keystones: Interlocking Acoustic V-Point */}
-          <path
-            d="M 14.5 22.5 L 22 37 C 22.5 37.9 23.8 37.9 24.3 37 L 31.8 22.5 L 27.2 19.8 L 22 30 L 16.8 19.8 Z"
-            fill="url(#vx-eggplant)"
-          />
-
-          {/* Floating High-Voltage Signal Core (Acoustic Resonance Focal Point) */}
-          <path
-            d="M 18.5 20 L 22 30 L 25.5 20 L 22 17 Z"
-            fill="url(#vx-orange)"
-          />
-
-          {/* Specular Orchid Reflection Highlight */}
-          <circle cx="22" cy="21" r="2.5" fill="#FFFFFF" opacity="0.9" />
-          <circle cx="22" cy="21" r="1.2" fill="#FF5A0A" />
+          {/* Focal Intelligence Spark Node */}
+          <circle cx="14" cy="14" r="1.4" fill="#FF5A0A" />
         </svg>
       </div>
 
