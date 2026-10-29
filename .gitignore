@@ -21,7 +21,9 @@ frontend/.pnpm-store/
 # Environment & Local Storage
 .env*.local
 *.sqlite3
+*.db
 *.log
+backend/app/data/uploads/*.csv
 
 # Operating System
 .DS_Store
