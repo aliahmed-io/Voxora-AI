@@ -34,8 +34,8 @@ describe("Dashboard Components & Custom Logo", () => {
     expect(screen.getByText("/100")).toBeInTheDocument();
     expect(screen.getByText("Positive")).toBeInTheDocument();
     expect(screen.getByText("800 (80%)")).toBeInTheDocument();
-    expect(screen.getByText("Top Pain Point")).toBeInTheDocument();
-    expect(screen.getByText("Top Opportunity")).toBeInTheDocument();
+    expect(screen.getByText("Net Sentiment")).toBeInTheDocument();
+    expect(screen.getByText("Friction Share")).toBeInTheDocument();
   });
 
   it("renders StatRibbon with 6 top metrics", () => {

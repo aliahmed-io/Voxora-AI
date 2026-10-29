@@ -5,9 +5,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
   Search,
-  Bell,
-  HelpCircle,
-  Settings,
   ChevronDown,
   Database,
   UploadCloud,
@@ -160,33 +157,6 @@ export function Navbar({ currentDatasetId, onDatasetChange }: NavbarProps) {
           )}
         </div>
 
-        {/* Action Icons */}
-        <div className="hidden sm:flex items-center gap-1.5 text-[#71367B]">
-          <button
-            className="relative p-2 rounded-xl hover:bg-[#FAF0F8] text-[#71367B] hover:text-[#400849] transition-colors"
-            title="Notifications"
-          >
-            <Bell className="w-4 h-4" />
-            <span className="w-2 h-2 rounded-full bg-[#FF5A0A] absolute top-2 right-2 border-2 border-white" />
-          </button>
-          <button
-            className="p-2 rounded-xl hover:bg-[#FAF0F8] text-[#71367B] hover:text-[#400849] transition-colors"
-            title="Help & Documentation"
-          >
-            <HelpCircle className="w-4 h-4" />
-          </button>
-          <button
-            className="p-2 rounded-xl hover:bg-[#FAF0F8] text-[#71367B] hover:text-[#400849] transition-colors"
-            title="Settings"
-          >
-            <Settings className="w-4 h-4" />
-          </button>
-        </div>
-
-        {/* User Profile Avatar (Deep Eggplant with Signal Orange Border/Accent) */}
-        <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-[#FF5A0A]/30 shrink-0 bg-[#400849] flex items-center justify-center text-[#FF5A0A] text-xs font-black shadow-xs">
-          AL
-        </div>
       </div>
 
       {/* Mobile Drawer */}
