@@ -11,6 +11,7 @@ import pandas as pd
 from datetime import datetime
 from typing import Dict, Any, List
 from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks, status
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from app.database import get_db, SessionLocal
 from app.models.db_models import Dataset, Review, AnalysisJob
@@ -367,3 +368,41 @@ def get_job_status(job_id: str, db: Session = Depends(get_db)):
         progress=round(job.progress, 1),
         error_message=job.error_message
     )
+
+
+class SinglePredictRequest(BaseModel):
+    text: str
+
+
+@router.post("/model/predict")
+def predict_single_review(request: SinglePredictRequest):
+    """
+    Real-time interactive inference endpoint for arbitrary feedback text.
+    Returns predicted sentiment, calibrated confidence, class probabilities, topic, and token weights.
+    """
+    raw_text = request.text.strip()
+    if not raw_text:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Text cannot be empty."
+        )
+
+    clf = SentimentClassifier()
+    top_model = TopicModeler()
+    explainer = ModelExplainer()
+
+    s_res = clf.predict([raw_text])[0]
+    t_res = top_model.infer([raw_text])[0]
+    exp_res = explainer.explain_review(raw_text)
+
+    return {
+        "text": raw_text,
+        "clean_text": s_res["clean_text"],
+        "predicted_sentiment": s_res["predicted_sentiment"],
+        "confidence": round(s_res["confidence"], 4),
+        "polarity": round(s_res["polarity"], 4),
+        "probabilities": {k: round(v, 4) for k, v in s_res["probabilities"].items()},
+        "topic_id": t_res["topic_id"],
+        "topic_name": t_res["topic_name"],
+        "influential_terms": exp_res.get("influential_terms", [])
+    }

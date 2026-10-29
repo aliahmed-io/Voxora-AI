@@ -160,6 +160,25 @@ export const api = {
     });
   },
 
+  // Live ML Sandbox Inference
+  async predictReview(text: string): Promise<{
+    text: string;
+    clean_text: string;
+    predicted_sentiment: SentimentLabel;
+    confidence: number;
+    polarity: number;
+    probabilities: { positive: number; neutral: number; negative: number };
+    topic_id: number;
+    topic_name: string;
+    influential_terms: Array<{ term: string; weight: number; polarity: "positive" | "negative" }>;
+  }> {
+    return fetchJson(`/api/model/predict`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text }),
+    });
+  },
+
   // Report URLs for direct browser downloads
   getPdfReportUrl(datasetId: string): string {
     return `${API_BASE}/api/reports/${datasetId}/pdf`;

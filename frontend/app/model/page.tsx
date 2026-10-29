@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Navbar } from "@/components/layout/Navbar";
 import { ConfusionMatrixGrid } from "@/components/model/ConfusionMatrixGrid";
+import { ModelSandbox } from "@/components/model/ModelSandbox";
 import { api } from "@/lib/api";
 import { ModelEvaluationResponse } from "@/lib/types";
 import {
@@ -189,6 +190,9 @@ export default function ModelEvaluationPage() {
               </table>
             </div>
           </div>
+
+          {/* Real-Time Interactive Model Sandbox */}
+          <ModelSandbox />
 
           {/* Confusion Matrix & Class Distribution */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

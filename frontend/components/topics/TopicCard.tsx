@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { TopicSummary } from "@/lib/types";
 import { Tag, Quote } from "lucide-react";
 
@@ -64,12 +65,14 @@ export function TopicCard({ topic }: TopicCardProps) {
           </span>
           <div className="flex flex-wrap gap-1.5">
             {topic.top_keywords.slice(0, 8).map((kw) => (
-              <span
+              <Link
                 key={kw}
-                className="px-2.5 py-1 rounded-lg text-xs font-bold bg-[#FAF0F8] text-[#400849] border border-[#E7B0DE]/40"
+                href={`/reviews?search=${encodeURIComponent(kw)}`}
+                className="px-2.5 py-1 rounded-lg text-xs font-bold bg-[#FAF0F8] text-[#400849] border border-[#E7B0DE]/40 hover:bg-[#400849] hover:text-white hover:border-[#400849] transition-all cursor-pointer shadow-2xs"
+                title={`Filter reviews by "${kw}"`}
               >
                 {kw}
-              </span>
+              </Link>
             ))}
           </div>
         </div>
