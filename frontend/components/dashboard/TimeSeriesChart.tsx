@@ -19,6 +19,44 @@ interface TimeSeriesChartProps {
 
 export function TimeSeriesChart({ data }: TimeSeriesChartProps) {
   const [timeFilter, setTimeFilter] = useState("Last 30 days");
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
+
+  const filterOptions = [
+    { label: "Last 14 days", count: 14 },
+    { label: "Last 30 days", count: 30 },
+    { label: "Last 90 days", count: 90 },
+    { label: "All Time", count: Infinity },
+  ];
+
+  // Close on outside click
+  React.useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Filter and format data based on active range
+  const formattedData = React.useMemo(() => {
+    if (!data || data.length === 0) return [];
+    let slice = data;
+    if (timeFilter === "Last 14 days") {
+      slice = data.slice(-14);
+    } else if (timeFilter === "Last 30 days") {
+      slice = data.slice(-30);
+    } else if (timeFilter === "Last 90 days") {
+      slice = data.slice(-90);
+    }
+    return slice.map((d) => ({
+      ...d,
+      formattedDate: d.date.length >= 10 ? d.date.slice(5) : d.date, // MM-DD
+      percentageScore: Math.round(((d.average_score - 1) / 4) * 55 + 45), // realistic 45-100% CSAT scale
+    }));
+  }, [data, timeFilter]);
 
   if (!data || data.length === 0) {
     return (
@@ -30,13 +68,6 @@ export function TimeSeriesChart({ data }: TimeSeriesChartProps) {
       </div>
     );
   }
-
-  // Sample or format data cleanly
-  const formattedData = data.slice(-45).map((d) => ({
-    ...d,
-    formattedDate: d.date.slice(5), // MM-DD
-    percentageScore: Math.round(((d.average_score - 1) / 4) * 55 + 45), // realistic 45-100% CSAT scale
-  }));
 
   return (
     <div className="p-5 rounded-3xl bg-white border border-[#E7B0DE]/40 shadow-sm flex flex-col justify-between h-full">
@@ -54,14 +85,39 @@ export function TimeSeriesChart({ data }: TimeSeriesChartProps) {
         </div>
 
         {/* Dropdown Selector */}
-        <div className="relative shrink-0">
+        <div className="relative shrink-0" ref={dropdownRef}>
           <button
-            onClick={() => setTimeFilter(timeFilter === "Last 30 days" ? "All Time" : "Last 30 days")}
-            className="flex items-center gap-1 text-[10px] font-black text-[#71367B] hover:text-[#400849] transition-colors bg-[#FAF0F8] px-2.5 py-1 rounded-lg whitespace-nowrap"
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+            className="flex items-center gap-1.5 text-[10px] font-black text-[#71367B] hover:text-[#400849] transition-colors bg-[#FAF0F8] hover:bg-[#F3DCF0] px-2.5 py-1 rounded-lg whitespace-nowrap border border-[#E7B0DE]/30"
+            aria-expanded={isOpen}
           >
             <span>{timeFilter}</span>
-            <ChevronDown className="w-3 h-3 text-[#A872AF]" />
+            <ChevronDown className={`w-3 h-3 text-[#A872AF] transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
           </button>
+
+          {isOpen && (
+            <div className="absolute right-0 mt-1 w-32 bg-white border border-[#E7B0DE]/60 rounded-xl shadow-xl py-1 z-30">
+              {filterOptions.map((opt) => (
+                <button
+                  key={opt.label}
+                  type="button"
+                  onClick={() => {
+                    setTimeFilter(opt.label);
+                    setIsOpen(false);
+                  }}
+                  className={`w-full text-left px-3 py-1.5 text-[11px] font-bold transition-colors flex items-center justify-between ${
+                    timeFilter === opt.label
+                      ? "bg-[#400849] text-white"
+                      : "text-[#400849] hover:bg-[#FAF0F8]"
+                  }`}
+                >
+                  <span>{opt.label}</span>
+                  {timeFilter === opt.label && <span className="text-[#FF5A0A] font-black text-xs">&bull;</span>}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

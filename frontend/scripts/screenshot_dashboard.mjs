@@ -15,6 +15,24 @@ async function main() {
   if (await trajectoryCard.count() > 0) {
     await trajectoryCard.first().screenshot({ path: "trajectory_card.png" });
     console.log("Captured trajectory_card.png");
+
+    // Click the time range button to open dropdown
+    const timeBtn = trajectoryCard.locator("button:has-text('Last 30 days')");
+    if (await timeBtn.count() > 0) {
+      await timeBtn.first().click();
+      await page.waitForTimeout(300);
+      await trajectoryCard.first().screenshot({ path: "trajectory_dropdown_open.png" });
+      console.log("Captured trajectory_dropdown_open.png");
+
+      // Click "Last 14 days" to verify filtering action
+      const opt14 = trajectoryCard.locator("button:has-text('Last 14 days')");
+      if (await opt14.count() > 0) {
+        await opt14.first().click();
+        await page.waitForTimeout(300);
+        await trajectoryCard.first().screenshot({ path: "trajectory_filtered_14d.png" });
+        console.log("Captured trajectory_filtered_14d.png");
+      }
+    }
   }
 
   const radarCard = page.locator("text=Topic Resonance Vector").locator("xpath=ancestor::div[contains(@class, 'rounded-3xl')][1]");

@@ -45,7 +45,57 @@ def download_pdf_report(dataset_id: str, db: Session = Depends(get_db)):
         with open(eval_path, "r", encoding="utf-8") as f:
             eval_metrics = json.load(f)
 
-    pdf_buffer = generate_pdf_report(dataset.name, summary_stats, eval_metrics)
+    # Load AI executive synthesis
+    ai_synthesis = None
+    try:
+        from app.services.gemini_service import synthesize_executive_insights
+        ai_synthesis = synthesize_executive_insights(summary_stats)
+    except Exception:
+        ai_synthesis = None
+
+    # Retrieve representative exemplar reviews
+    exemplar_reviews = {}
+    pos_rev = (
+        db.query(Review)
+        .filter(Review.dataset_id == dataset_id, Review.predicted_sentiment == "positive")
+        .order_by(Review.confidence_score.desc())
+        .first()
+    )
+    if pos_rev:
+        try:
+            terms = json.loads(pos_rev.influential_terms) if pos_rev.influential_terms else []
+        except Exception:
+            terms = []
+        exemplar_reviews["positive"] = {
+            "text": pos_rev.original_text,
+            "confidence_pct": round(pos_rev.confidence_score * 100),
+            "influential_terms": terms
+        }
+
+    neg_rev = (
+        db.query(Review)
+        .filter(Review.dataset_id == dataset_id, Review.predicted_sentiment == "negative")
+        .order_by(Review.confidence_score.desc())
+        .first()
+    )
+    if neg_rev:
+        try:
+            terms = json.loads(neg_rev.influential_terms) if neg_rev.influential_terms else []
+        except Exception:
+            terms = []
+        exemplar_reviews["negative"] = {
+            "text": neg_rev.original_text,
+            "confidence_pct": round(neg_rev.confidence_score * 100),
+            "influential_terms": terms
+        }
+
+    pdf_buffer = generate_pdf_report(
+        dataset.name,
+        summary_stats,
+        eval_metrics=eval_metrics,
+        ai_synthesis=ai_synthesis,
+        exemplar_reviews=exemplar_reviews
+    )
     filename = f"Voxora_Report_{dataset.name.replace(' ', '_')}.pdf"
 
     return StreamingResponse(
