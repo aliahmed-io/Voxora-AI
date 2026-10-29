@@ -59,7 +59,7 @@ export function LatestInsights() {
         {insights.map((item) => {
           const Icon = item.icon;
           return (
-            <div key={item.id} className="flex items-start gap-3 group cursor-pointer">
+            <Link key={item.id} href="/reviews" className="flex items-start gap-3 group transition-transform hover:translate-x-0.5">
               <div
                 className="w-7 h-7 rounded-xl flex items-center justify-center shrink-0 mt-0.5 shadow-2xs"
                 style={{ backgroundColor: item.bgColor, color: item.iconColor }}
@@ -85,7 +85,7 @@ export function LatestInsights() {
                   {item.date}
                 </span>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

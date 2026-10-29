@@ -2,14 +2,13 @@
 
 import React, { useState, useMemo } from "react";
 import { SentimentMapPoint } from "@/lib/types";
-import { Info, Plus, Minus, Crosshair, Sparkles, Layers } from "lucide-react";
+import { Info, Sparkles, Layers } from "lucide-react";
 
 interface SentimentMapProps {
   points: SentimentMapPoint[];
 }
 
 export function SentimentMap({ points }: SentimentMapProps) {
-  const [activeRange, setActiveRange] = useState<"1W" | "1M" | "3M" | "1Y" | "ALL">("3M");
   const [viewMode, setViewMode] = useState<"hexbin" | "scatter">("hexbin");
   const [hoveredPoint, setHoveredPoint] = useState<SentimentMapPoint | null>(null);
 
@@ -151,49 +150,11 @@ export function SentimentMap({ points }: SentimentMapProps) {
               <span>Scatter</span>
             </button>
           </div>
-
-          {/* Time Range Pills */}
-          <div className="flex items-center bg-[#FAF0F8] p-0.5 rounded-xl border border-[#E7B0DE]/40 text-[10px] font-bold text-[#71367B]">
-            {(["1W", "1M", "3M", "1Y", "ALL"] as const).map((range) => (
-              <button
-                key={range}
-                onClick={() => setActiveRange(range)}
-                className={`px-2 py-1 rounded-lg transition-all ${
-                  activeRange === range
-                    ? "bg-[#FF5A0A] text-white shadow-xs font-black"
-                    : "hover:text-[#400849]"
-                }`}
-              >
-                {range}
-              </button>
-            ))}
-          </div>
         </div>
       </div>
 
       {/* Main Chart Canvas Container */}
       <div className="relative w-full h-[280px] bg-gradient-to-b from-[#FDF9FD] to-[#F9F0F8] rounded-2xl border border-[#E7B0DE]/50 overflow-hidden select-none">
-        {/* Floating Zoom & Tool Controls (Top-Left, Padded Away from Ticks) */}
-        <div className="absolute left-3 top-3 flex flex-col gap-1 z-20 bg-white/95 backdrop-blur-md p-1 rounded-xl border border-[#E7B0DE]/60 shadow-xs text-[#71367B]">
-          <button
-            className="p-1.5 hover:bg-[#FAF0F8] hover:text-[#FF5A0A] rounded-lg transition-colors"
-            title="Zoom In"
-          >
-            <Plus className="w-3 h-3 stroke-[2.5]" />
-          </button>
-          <button
-            className="p-1.5 hover:bg-[#FAF0F8] hover:text-[#FF5A0A] rounded-lg transition-colors"
-            title="Zoom Out"
-          >
-            <Minus className="w-3 h-3 stroke-[2.5]" />
-          </button>
-          <button
-            className="p-1.5 hover:bg-[#FAF0F8] hover:text-[#FF5A0A] rounded-lg transition-colors"
-            title="Recenter"
-          >
-            <Crosshair className="w-3 h-3 stroke-[2.5]" />
-          </button>
-        </div>
 
         {/* Legend Indicators (Top-Right) */}
         <div className="absolute right-3 top-3 flex items-center gap-3 z-20 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-xl border border-[#E7B0DE]/60 text-[10px] font-bold text-[#71367B]">

@@ -184,7 +184,11 @@ export default function UploadPage() {
                 </p>
                 <button
                   type="button"
-                  className="mt-6 px-5 py-2.5 rounded-xl bg-[#FF5A0A] text-white text-xs font-black shadow-md shadow-[#FF5A0A]/20 hover:bg-[#E04D05]"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    fileInputRef.current?.click();
+                  }}
+                  className="mt-6 px-5 py-2.5 rounded-xl bg-[#FF5A0A] text-white text-xs font-black shadow-md shadow-[#FF5A0A]/20 hover:bg-[#E04D05] transition-all"
                 >
                   Browse Files
                 </button>

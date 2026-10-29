@@ -11,7 +11,6 @@ import {
   FileSpreadsheet,
   Plus,
   Folder,
-  ChevronDown,
   Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -178,7 +177,6 @@ export function Sidebar() {
             </span>
           </div>
         </div>
-        <ChevronDown className="w-3.5 h-3.5 text-[#A872AF] shrink-0" />
       </div>
     </aside>
   );
