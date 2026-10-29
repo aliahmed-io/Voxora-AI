@@ -19,9 +19,11 @@ describe("Utility & Token Contracts", () => {
   });
 
   it("exports valid design token constants matching Voxora brand palette", () => {
-    expect(colors.primary).toBe("#6D4AFF");
-    expect(colors.bgBase).toBe("#F5F2FF");
-    expect(colors.ink).toBe("#161327");
+    expect(colors.orchid).toBe("#E7B0DE");
+    expect(colors.eggplant).toBe("#400849");
+    expect(colors.signalOrange).toBe("#FF5A0A");
+    expect(colors.bgBase).toBe("#FBF3F9");
+    expect(colors.ink).toBe("#400849");
     expect(spacing.grid).toBe(8);
     expect(typography.fonts.display).toContain("Plus Jakarta Sans");
   });

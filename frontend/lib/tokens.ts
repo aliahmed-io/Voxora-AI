@@ -1,33 +1,56 @@
 /**
  * Voxora AI Design System Tokens
- * Conforming to Rule 5 (8pt Grid) and Rule 13 (Design Tokens & Types module).
+ * Conforming to Rule 5 (8pt Grid), Rule 13 (Design Tokens & Types module),
+ * and the 60-30-10 Editorial Palette:
+ * - 60% Dominant: Pastel Orchid Pink (#E7B0DE / #FBF3F9)
+ * - 30% Structural: Deep Eggplant Violet (#400849)
+ * - 10% High-Voltage Accent: Signal Orange (#FF5A0A)
  */
 
 export const colors = {
-  primary: "#6D4AFF",
-  primaryHover: "#5B39EE",
-  primarySoft: "#B6A4FF",
-  primaryGhost: "#ECE7FF",
-  primaryHalo: "rgba(109, 74, 255, 0.12)",
-  bgBase: "#F5F2FF",
+  // 10% High-Voltage Accent
+  signalOrange: "#FF5A0A",
+  signalOrangeHover: "#E04D05",
+  signalOrangeGhost: "#FFF2EC",
+  signalOrangeHalo: "rgba(255, 90, 10, 0.20)",
+
+  // 30% Structural Deep Velvet
+  eggplant: "#400849",
+  eggplantHover: "#2F0536",
+  eggplantSoft: "#631A70",
+  eggplantGhost: "#F6E9F8",
+  eggplantHalo: "rgba(64, 8, 73, 0.15)",
+
+  // 60% Dominant Pastel Foundation
+  orchid: "#E7B0DE",
+  orchidSoft: "#F3DCF0",
+  orchidGhost: "#FAEEF7",
+  bgBase: "#FBF3F9",
   bgCard: "#FFFFFF",
-  bgSubtle: "#FAF8FF",
-  ink: "#161327",
-  inkMuted: "#625D7E",
-  inkSubtle: "#9B94B8",
-  borderLight: "rgba(109, 74, 255, 0.10)",
-  borderHover: "rgba(109, 74, 255, 0.25)",
-  accentAmber: "#FFB86B",
+  bgSubtle: "#FAF0F8",
+
+  // Typography & Ink
+  primary: "#400849",
+  primaryHover: "#2F0536",
+  ink: "#400849",
+  inkMuted: "#71367B",
+  inkSubtle: "#A872AF",
+
+  // Borders & Glows
+  borderLight: "rgba(231, 176, 222, 0.40)",
+  borderHover: "rgba(64, 8, 73, 0.30)",
+
+  // Sentiments (aligned with palette)
   sentiment: {
     positive: "#10B981",
     positiveGhost: "#ECFDF5",
     positiveBorder: "rgba(16, 185, 129, 0.25)",
-    neutral: "#F59E0B",
-    neutralGhost: "#FFFBEB",
-    neutralBorder: "rgba(245, 158, 11, 0.25)",
-    negative: "#F43F5E",
-    negativeGhost: "#FFF1F2",
-    negativeBorder: "rgba(244, 63, 94, 0.25)",
+    neutral: "#FF5A0A", // Signal Orange for neutral/opportunity
+    neutralGhost: "#FFF2EC",
+    neutralBorder: "rgba(255, 90, 10, 0.25)",
+    negative: "#E11D48",
+    negativeGhost: "#FFE4E6",
+    negativeBorder: "rgba(225, 29, 72, 0.25)",
   }
 } as const;
 

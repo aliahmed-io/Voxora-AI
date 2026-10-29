@@ -1,25 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 :root {
-  --voxora-primary: #6D4AFF;
-  --voxora-primary-hover: #5B39EE;
-  --voxora-primary-soft: #B6A4FF;
-  --voxora-primary-ghost: #ECE7FF;
-  --voxora-bg: #F5F2FF;
+  /* 60% Dominant: Pastel Orchid Pink Foundation */
+  --voxora-orchid: #E7B0DE;
+  --voxora-orchid-soft: #F3DCF0;
+  --voxora-orchid-ghost: #FAEEF7;
+  --voxora-bg: #FBF3F9;
   --voxora-card: #FFFFFF;
-  --voxora-ink: #161327;
-  --voxora-muted: #625D7E;
-  --voxora-subtle: #9B94B8;
-  --voxora-amber: #FFB86B;
+
+  /* 30% Structural: Deep Eggplant Violet */
+  --voxora-eggplant: #400849;
+  --voxora-eggplant-hover: #2F0536;
+  --voxora-eggplant-soft: #631A70;
+  --voxora-ink: #400849;
+  --voxora-muted: #71367B;
+  --voxora-subtle: #A872AF;
+
+  /* 10% High-Voltage Accent: Signal Orange */
+  --voxora-orange: #FF5A0A;
+  --voxora-orange-hover: #E04D05;
+  --voxora-orange-ghost: #FFF2EC;
+
+  /* Semantic indicators */
   --voxora-emerald: #10B981;
-  --voxora-rose: #F43F5E;
+  --voxora-rose: #E11D48;
 }
 
 @layer base {
   body {
-    background-color: #F5F2FF;
-    color: #161327;
+    background-color: #FBF3F9;
+    color: #400849;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
@@ -27,16 +38,18 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #400849;
+    letter-spacing: -0.02em;
   }
 }
 
 /* Custom glow and backdrop effects */
 .voxora-glow {
-  box-shadow: 0 10px 30px -10px rgba(109, 74, 255, 0.25);
+  box-shadow: 0 10px 30px -10px rgba(64, 8, 73, 0.20), 0 0 20px -5px rgba(255, 90, 10, 0.15);
 }
 
 .voxora-card-shadow {
-  box-shadow: 0 4px 20px -2px rgba(109, 74, 255, 0.06), 0 2px 6px -1px rgba(22, 19, 39, 0.04);
+  box-shadow: 0 4px 24px -2px rgba(64, 8, 73, 0.05), 0 2px 6px -1px rgba(231, 176, 222, 0.20);
 }
 
 .voxora-card-hover {
@@ -45,7 +58,7 @@
 
 .voxora-card-hover:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px -4px rgba(109, 74, 255, 0.12), 0 4px 10px -2px rgba(22, 19, 39, 0.04);
+  box-shadow: 0 12px 28px -4px rgba(64, 8, 73, 0.10), 0 4px 12px -2px rgba(255, 90, 10, 0.12);
 }
 
 /* Smooth custom scrollbars */
@@ -55,14 +68,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #F5F2FF;
+  background: #FBF3F9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #B6A4FF;
+  background: #E7B0DE;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6D4AFF;
+  background: #400849;
 }

@@ -34,8 +34,8 @@ export function StatRibbon({
       change: "+18%",
       isPositive: true,
       icon: Users,
-      iconColor: "#6D4AFF",
-      bgColor: "#EDE9FE",
+      iconColor: "#400849",
+      bgColor: "#F6E9F8",
     },
     {
       label: "Positive Feedback",
@@ -43,8 +43,8 @@ export function StatRibbon({
       change: "+11%",
       isPositive: true,
       icon: UserCheck,
-      iconColor: "#3B82F6",
-      bgColor: "#DBEAFE",
+      iconColor: "#10B981",
+      bgColor: "#ECFDF5",
     },
     {
       label: "Neutral Feedback",
@@ -53,8 +53,8 @@ export function StatRibbon({
       isPositive: true,
       hasSparkline: true,
       icon: Sparkles,
-      iconColor: "#8B5CF6",
-      bgColor: "#F3E8FF",
+      iconColor: "#FF5A0A",
+      bgColor: "#FFF2EC",
     },
     {
       label: "Negative Issues",
@@ -62,7 +62,7 @@ export function StatRibbon({
       change: "-12%",
       isPositive: false,
       icon: FileText,
-      iconColor: "#F43F5E",
+      iconColor: "#E11D48",
       bgColor: "#FFE4E6",
     },
     {
@@ -71,8 +71,8 @@ export function StatRibbon({
       change: "+7%",
       isPositive: true,
       icon: Target,
-      iconColor: "#6D4AFF",
-      bgColor: "#EDE9FE",
+      iconColor: "#FF5A0A",
+      bgColor: "#FFF2EC",
     },
     {
       label: "Reviews Analyzed",
@@ -80,8 +80,8 @@ export function StatRibbon({
       change: "+21%",
       isPositive: true,
       icon: Eye,
-      iconColor: "#6D4AFF",
-      bgColor: "#EDE9FE",
+      iconColor: "#400849",
+      bgColor: "#F6E9F8",
     },
   ];
 
@@ -92,19 +92,19 @@ export function StatRibbon({
         return (
           <div
             key={idx}
-            className="p-3.5 rounded-2xl bg-white border border-[#ECE8F8] shadow-sm flex items-center justify-between hover:shadow-md transition-shadow select-none"
+            className="p-3.5 rounded-2xl bg-white border border-[#E7B0DE]/40 shadow-xs flex items-center justify-between hover:shadow-md hover:border-[#E7B0DE] transition-all select-none"
           >
             <div className="min-w-0">
-              <span className="text-[10px] font-semibold text-[#9B94B8] block truncate">
+              <span className="text-[10px] font-bold text-[#A872AF] block truncate">
                 {s.label}
               </span>
               <div className="flex items-baseline gap-1.5 mt-0.5">
-                <span className="text-base sm:text-lg font-black text-[#161327] tracking-tight">
+                <span className="text-base sm:text-lg font-black text-[#400849] tracking-tight">
                   {s.value}
                 </span>
                 <span
-                  className={`text-[9px] font-bold ${
-                    s.isPositive ? "text-[#10B981]" : "text-[#F43F5E]"
+                  className={`text-[9px] font-black ${
+                    s.isPositive ? "text-[#10B981]" : "text-[#E11D48]"
                   }`}
                 >
                   {s.change}

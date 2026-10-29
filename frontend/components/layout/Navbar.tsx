@@ -54,12 +54,12 @@ export function Navbar({ currentDatasetId, onDatasetChange }: NavbarProps) {
   ];
 
   return (
-    <header className="h-16 border-b border-[#ECE8F8] bg-white px-6 flex items-center justify-between sticky top-0 z-40">
+    <header className="h-16 border-b border-[#E7B0DE]/40 bg-white/90 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-40">
       {/* Mobile Menu & Brand */}
       <div className="flex items-center gap-3 md:hidden">
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="p-1.5 rounded-lg text-[#161327] hover:bg-[#F5F2FF]"
+          className="p-1.5 rounded-lg text-[#400849] hover:bg-[#FAF0F8]"
           aria-label="Toggle Navigation Menu"
         >
           {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -69,21 +69,21 @@ export function Navbar({ currentDatasetId, onDatasetChange }: NavbarProps) {
         </Link>
       </div>
 
-      {/* Global Search Bar (Matching reference image) */}
+      {/* Global Search Bar (60% Orchid tinted background + 30% Eggplant text) */}
       <div className="hidden sm:flex items-center flex-1 max-w-md mr-4">
         <form onSubmit={handleSearchSubmit} className="relative w-full">
-          <Search className="w-4 h-4 text-[#9B94B8] absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#A872AF] absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search reviews, insights, topics..."
-            className="w-full pl-9 pr-4 py-2 rounded-xl text-xs bg-[#F8F9FE] border border-[#EBE8F8] text-[#161327] placeholder-[#9B94B8] focus:outline-none focus:border-[#6D4AFF] focus:bg-white transition-all"
+            className="w-full pl-9 pr-4 py-2 rounded-xl text-xs bg-[#FBF3F9] border border-[#E7B0DE]/60 text-[#400849] placeholder-[#A872AF] focus:outline-none focus:border-[#400849] focus:bg-white transition-all font-medium"
           />
         </form>
       </div>
 
-      {/* Top Header Navigation Tabs (Matching reference image) */}
+      {/* Top Header Navigation Tabs (Active tab underline in Signal Orange) */}
       <nav className="hidden lg:flex items-center gap-1 h-full">
         {TOP_TABS.map((tab) => {
           const isActive = pathname === tab.href;
@@ -92,10 +92,10 @@ export function Navbar({ currentDatasetId, onDatasetChange }: NavbarProps) {
               key={tab.href}
               href={tab.href}
               className={cn(
-                "h-full px-3.5 flex items-center text-xs font-semibold border-b-2 transition-colors",
+                "h-full px-4 flex items-center text-xs font-bold border-b-2 transition-colors",
                 isActive
-                  ? "border-[#6D4AFF] text-[#6D4AFF]"
-                  : "border-transparent text-[#625D7E] hover:text-[#161327]"
+                  ? "border-[#FF5A0A] text-[#400849]"
+                  : "border-transparent text-[#71367B] hover:text-[#400849]"
               )}
             >
               {tab.label}
@@ -110,18 +110,18 @@ export function Navbar({ currentDatasetId, onDatasetChange }: NavbarProps) {
         <div className="relative">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-[#ECE8F8] bg-[#F8F9FE] hover:bg-[#F3F0FF] text-xs font-semibold text-[#161327] transition-all"
+            className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-[#E7B0DE]/60 bg-[#FAF0F8] hover:bg-[#F3DCF0] text-xs font-bold text-[#400849] transition-all"
           >
-            <Database className="w-3.5 h-3.5 text-[#6D4AFF]" />
+            <Database className="w-3.5 h-3.5 text-[#FF5A0A]" />
             <span className="max-w-[130px] sm:max-w-[170px] truncate">
               {activeDataset ? activeDataset.name : "Select Dataset"}
             </span>
-            <ChevronDown className="w-3.5 h-3.5 text-[#9B94B8]" />
+            <ChevronDown className="w-3.5 h-3.5 text-[#A872AF]" />
           </button>
 
           {isOpen && (
-            <div className="absolute right-0 mt-2 w-72 rounded-2xl bg-white border border-[#ECE8F8] shadow-xl p-1.5 z-50">
-              <div className="px-3 py-2 text-[10px] font-bold text-[#9B94B8] uppercase tracking-wider">
+            <div className="absolute right-0 mt-2 w-72 rounded-2xl bg-white border border-[#E7B0DE]/60 shadow-xl p-1.5 z-50">
+              <div className="px-3 py-2 text-[10px] font-black text-[#A872AF] uppercase tracking-wider">
                 Select Active Dataset
               </div>
               <div className="max-h-60 overflow-y-auto space-y-0.5">
@@ -135,22 +135,22 @@ export function Navbar({ currentDatasetId, onDatasetChange }: NavbarProps) {
                     className={cn(
                       "w-full text-left px-3 py-2 rounded-xl text-xs font-medium flex items-center justify-between transition-colors",
                       d.id === currentDatasetId
-                        ? "bg-[#EDE9FE] text-[#6D4AFF] font-bold"
-                        : "text-[#161327] hover:bg-[#F8F9FE]"
+                        ? "bg-[#400849] text-white font-bold"
+                        : "text-[#400849] hover:bg-[#FAF0F8]"
                     )}
                   >
                     <span className="truncate">{d.name}</span>
-                    <span className="text-[10px] text-[#9B94B8] shrink-0 ml-2">
+                    <span className="text-[10px] text-[#A872AF] shrink-0 ml-2">
                       {d.row_count.toLocaleString()} revs
                     </span>
                   </button>
                 ))}
               </div>
-              <div className="border-t border-[#ECE8F8] pt-1 mt-1">
+              <div className="border-t border-[#E7B0DE]/40 pt-1 mt-1">
                 <Link
                   href="/upload"
                   onClick={() => setIsOpen(false)}
-                  className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-[#6D4AFF] hover:bg-[#F3F0FF] flex items-center gap-2"
+                  className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-[#FF5A0A] hover:bg-[#FFF2EC] flex items-center gap-2"
                 >
                   <UploadCloud className="w-3.5 h-3.5" />
                   <span>Upload New CSV...</span>
@@ -161,76 +161,76 @@ export function Navbar({ currentDatasetId, onDatasetChange }: NavbarProps) {
         </div>
 
         {/* Action Icons */}
-        <div className="hidden sm:flex items-center gap-1.5 text-[#625D7E]">
+        <div className="hidden sm:flex items-center gap-1.5 text-[#71367B]">
           <button
-            className="relative p-2 rounded-xl hover:bg-[#F8F9FE] text-[#625D7E] hover:text-[#161327] transition-colors"
+            className="relative p-2 rounded-xl hover:bg-[#FAF0F8] text-[#71367B] hover:text-[#400849] transition-colors"
             title="Notifications"
           >
             <Bell className="w-4 h-4" />
-            <span className="w-2 h-2 rounded-full bg-[#EC4899] absolute top-2 right-2 border-2 border-white" />
+            <span className="w-2 h-2 rounded-full bg-[#FF5A0A] absolute top-2 right-2 border-2 border-white" />
           </button>
           <button
-            className="p-2 rounded-xl hover:bg-[#F8F9FE] text-[#625D7E] hover:text-[#161327] transition-colors"
+            className="p-2 rounded-xl hover:bg-[#FAF0F8] text-[#71367B] hover:text-[#400849] transition-colors"
             title="Help & Documentation"
           >
             <HelpCircle className="w-4 h-4" />
           </button>
           <button
-            className="p-2 rounded-xl hover:bg-[#F8F9FE] text-[#625D7E] hover:text-[#161327] transition-colors"
+            className="p-2 rounded-xl hover:bg-[#FAF0F8] text-[#71367B] hover:text-[#400849] transition-colors"
             title="Settings"
           >
             <Settings className="w-4 h-4" />
           </button>
         </div>
 
-        {/* User Profile Avatar */}
-        <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-[#ECE8F8] shrink-0 bg-gradient-to-tr from-[#6D4AFF] to-[#B6A4FF] flex items-center justify-center text-white text-xs font-bold shadow-sm">
+        {/* User Profile Avatar (Deep Eggplant with Signal Orange Border/Accent) */}
+        <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-[#FF5A0A]/30 shrink-0 bg-[#400849] flex items-center justify-center text-[#FF5A0A] text-xs font-black shadow-xs">
           AL
         </div>
       </div>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 top-16 bg-white border-b border-[#ECE8F8] text-[#161327] p-6 z-50 md:hidden flex flex-col space-y-3 shadow-2xl">
+        <div className="fixed inset-0 top-16 bg-white border-b border-[#E7B0DE] text-[#400849] p-6 z-50 md:hidden flex flex-col space-y-3 shadow-2xl">
           <Link
             href="/dashboard"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-sm font-semibold py-2 border-b border-[#ECE8F8]"
+            className="text-sm font-bold py-2 border-b border-[#E7B0DE]/40"
           >
             Overview
           </Link>
           <Link
             href="/reviews"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-sm font-semibold py-2 border-b border-[#ECE8F8]"
+            className="text-sm font-bold py-2 border-b border-[#E7B0DE]/40"
           >
             Reviews
           </Link>
           <Link
             href="/topics"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-sm font-semibold py-2 border-b border-[#ECE8F8]"
+            className="text-sm font-bold py-2 border-b border-[#E7B0DE]/40"
           >
             Topics
           </Link>
           <Link
             href="/upload"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-sm font-semibold py-2 border-b border-[#ECE8F8]"
+            className="text-sm font-bold py-2 border-b border-[#E7B0DE]/40"
           >
             Upload CSV
           </Link>
           <Link
             href="/model"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-sm font-semibold py-2 border-b border-[#ECE8F8]"
+            className="text-sm font-bold py-2 border-b border-[#E7B0DE]/40"
           >
             Model Evaluation
           </Link>
           <Link
             href="/reports"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-sm font-semibold py-2 border-b border-[#ECE8F8]"
+            className="text-sm font-bold py-2 border-b border-[#E7B0DE]/40"
           >
             Reports
           </Link>

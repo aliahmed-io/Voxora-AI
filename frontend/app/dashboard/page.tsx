@@ -56,7 +56,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#F8F9FE] text-[#161327]">
+    <div className="flex min-h-screen bg-[#FBF3F9] text-[#400849]">
       <Sidebar />
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -67,27 +67,27 @@ export default function DashboardPage() {
 
         <main className="flex-1 p-5 md:p-6 space-y-5 max-w-[1700px] w-full mx-auto">
           {loading && (
-            <div className="p-16 text-center rounded-3xl bg-white border border-[#ECE8F8] shadow-sm space-y-3">
-              <div className="w-8 h-8 rounded-full border-2 border-[#6D4AFF] border-t-transparent animate-spin mx-auto" />
-              <p className="text-xs font-semibold text-[#161327]">Loading intelligence metrics...</p>
+            <div className="p-16 text-center rounded-3xl bg-white border border-[#E7B0DE]/40 shadow-sm space-y-3">
+              <div className="w-8 h-8 rounded-full border-2 border-[#FF5A0A] border-t-transparent animate-spin mx-auto" />
+              <p className="text-xs font-bold text-[#400849]">Loading intelligence metrics...</p>
             </div>
           )}
 
           {error && !loading && (
-            <div className="p-12 text-center rounded-3xl bg-white border border-[#ECE8F8] shadow-sm space-y-4 max-w-md mx-auto">
-              <div className="w-12 h-12 rounded-2xl bg-[#EDE9FE] text-[#6D4AFF] flex items-center justify-center mx-auto">
+            <div className="p-12 text-center rounded-3xl bg-white border border-[#E7B0DE]/50 shadow-sm space-y-4 max-w-md mx-auto">
+              <div className="w-12 h-12 rounded-2xl bg-[#FFF2EC] text-[#FF5A0A] flex items-center justify-center mx-auto shadow-xs">
                 <UploadCloud className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-[#161327]">No Dataset Ready</h3>
-                <p className="text-xs text-[#625D7E] mt-1 leading-relaxed">
+                <h3 className="text-sm font-black text-[#400849]">No Dataset Ready</h3>
+                <p className="text-xs text-[#71367B] mt-1 leading-relaxed">
                   {error}
                 </p>
               </div>
               <div className="pt-2 flex justify-center gap-3">
                 <Link
                   href="/upload"
-                  className="px-5 py-2.5 rounded-xl bg-[#6D4AFF] text-white text-xs font-bold shadow-md shadow-[#6D4AFF]/25"
+                  className="px-5 py-2.5 rounded-xl bg-[#FF5A0A] hover:bg-[#E04D05] text-white text-xs font-extrabold shadow-md shadow-[#FF5A0A]/25"
                 >
                   Upload Your First CSV
                 </Link>
@@ -97,7 +97,7 @@ export default function DashboardPage() {
 
           {stats && !loading && (
             <>
-              {/* Row 1: Top 6-Metric Stat Ribbon (Matching reference image) */}
+              {/* Row 1: Top 6-Metric Stat Ribbon (60-30-10 Palette) */}
               <StatRibbon
                 totalReviews={stats.total_reviews}
                 positiveCount={stats.distribution.positive}
@@ -106,7 +106,7 @@ export default function DashboardPage() {
                 csatScore={stats.sentiment_score}
               />
 
-              {/* Row 2: Main 3-Column Editorial Intelligence Grid (Matching reference image) */}
+              {/* Row 2: Main 3-Column Editorial Intelligence Grid */}
               <div className="grid grid-cols-1 xl:grid-cols-12 gap-5 items-start">
                 {/* Left Column: Global Overview / Sentiment Gauge (3 cols) */}
                 <div className="xl:col-span-3 h-full">
