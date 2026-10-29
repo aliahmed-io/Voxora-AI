@@ -27,24 +27,24 @@ export function ChannelDistribution({ channels }: ChannelDistributionProps) {
           c.score >= 4.0
             ? "text-[#10B981]"
             : c.score >= 3.0
-            ? "text-[#6D4AFF]"
-            : "text-[#F43F5E]";
+            ? "text-[#FF5A0A]"
+            : "text-[#E11D48]";
 
         return (
           <div
             key={c.channel}
-            className="p-4 rounded-2xl bg-white border border-[#6D4AFF]/10 shadow-sm flex items-center justify-between voxora-card-hover"
+            className="p-4 rounded-3xl bg-white border border-[#E7B0DE]/40 shadow-sm flex items-center justify-between voxora-card-hover"
           >
             <div>
-              <div className="flex items-center gap-1.5 text-xs font-semibold text-[#625D7E] mb-1">
-                <Icon className="w-3.5 h-3.5 text-[#6D4AFF]" />
+              <div className="flex items-center gap-1.5 text-xs font-bold text-[#400849] mb-1">
+                <Icon className="w-3.5 h-3.5 text-[#FF5A0A]" />
                 <span className="truncate">{c.channel}</span>
               </div>
-              <span className="text-[11px] text-[#9B94B8]">
+              <span className="text-[11px] font-semibold text-[#A872AF]">
                 {c.reviews.toLocaleString()} verified revs
               </span>
             </div>
-            <div className={`text-2xl font-extrabold ${scoreColor}`}>
+            <div className={`text-2xl font-black ${scoreColor}`}>
               {c.score.toFixed(1)}
             </div>
           </div>

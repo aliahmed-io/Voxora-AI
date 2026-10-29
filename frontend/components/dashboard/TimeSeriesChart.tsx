@@ -40,12 +40,12 @@ export function TimeSeriesChart({ data }: TimeSeriesChartProps) {
 
   return (
     <div className="p-5 rounded-3xl bg-white border border-[#E7B0DE]/40 shadow-sm flex flex-col justify-between h-full">
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex items-center gap-1.5">
-          <h2 className="text-xs font-black text-[#400849] tracking-tight">
-            Sentiment Trajectory Over Time
+      <div className="flex items-center justify-between gap-2 mb-2">
+        <div className="flex items-center gap-1.5 min-w-0">
+          <h2 className="text-xs font-black text-[#400849] tracking-tight whitespace-nowrap">
+            Sentiment Trajectory
           </h2>
-          <div className="group relative">
+          <div className="group relative shrink-0">
             <Info className="w-3 h-3 text-[#A872AF] cursor-pointer" />
             <div className="absolute left-0 bottom-full mb-1.5 hidden group-hover:block w-48 p-2 bg-[#400849] text-white text-[10px] rounded-xl shadow-xl z-30 leading-snug border border-[#E7B0DE]/40">
               Temporal rolling average of customer satisfaction percentage over historical review dates.
@@ -54,10 +54,10 @@ export function TimeSeriesChart({ data }: TimeSeriesChartProps) {
         </div>
 
         {/* Dropdown Selector */}
-        <div className="relative">
+        <div className="relative shrink-0">
           <button
             onClick={() => setTimeFilter(timeFilter === "Last 30 days" ? "All Time" : "Last 30 days")}
-            className="flex items-center gap-1 text-[10px] font-black text-[#71367B] hover:text-[#400849] transition-colors bg-[#FAF0F8] px-2 py-1 rounded-lg"
+            className="flex items-center gap-1 text-[10px] font-black text-[#71367B] hover:text-[#400849] transition-colors bg-[#FAF0F8] px-2.5 py-1 rounded-lg whitespace-nowrap"
           >
             <span>{timeFilter}</span>
             <ChevronDown className="w-3 h-3 text-[#A872AF]" />

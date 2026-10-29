@@ -97,7 +97,7 @@ export default function ModelEvaluationPage() {
                 <Trophy className="w-3.5 h-3.5" />
                 <span>Tournament Champion Model</span>
               </div>
-              <h2 className="text-2xl font-black tracking-tight">
+              <h2 className="text-2xl font-black tracking-tight text-white">
                 {champ.model_name}
               </h2>
               <p className="text-xs text-[#E7B0DE] mt-1 max-w-xl leading-relaxed">

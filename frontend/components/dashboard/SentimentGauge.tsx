@@ -36,7 +36,6 @@ export function SentimentGauge({
   const beadY = 125 - radius * Math.sin(theta);
 
   // Computed real metrics from actual dataset
-  const totalReviews = positiveCount + neutralCount + negativeCount;
   const netScore = Math.round((positivePct - negativePct) * 10) / 10;
   const formattedNetScore = netScore > 0 ? `+${netScore}%` : `${netScore}%`;
 

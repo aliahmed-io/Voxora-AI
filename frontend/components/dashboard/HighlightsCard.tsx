@@ -13,38 +13,38 @@ export function HighlightsCard({ highlights }: HighlightsCardProps) {
   }
 
   return (
-    <div className="p-6 rounded-2xl bg-white border border-[#6D4AFF]/10 shadow-sm flex flex-col justify-between">
+    <div className="p-6 rounded-3xl bg-white border border-[#E7B0DE]/40 shadow-sm flex flex-col justify-between">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-sm font-bold text-[#161327] tracking-tight">
+        <h2 className="text-xs font-black text-[#400849] tracking-tight">
           Executive Highlights
         </h2>
-        <span className="text-[11px] font-semibold text-[#625D7E]">Key Discoveries</span>
+        <span className="text-[11px] font-bold text-[#A872AF]">Key Discoveries</span>
       </div>
 
-      <div className="space-y-3.5">
+      <div className="space-y-3">
         {highlights.map((h, idx) => (
-          <div key={h.id || idx} className="flex items-start gap-3.5 p-2 rounded-xl hover:bg-[#F5F2FF]/50 transition-colors">
-            <div className="w-7 h-7 rounded-lg bg-[#6D4AFF] text-white flex items-center justify-center font-extrabold text-xs shrink-0 shadow-sm shadow-[#6D4AFF]/30">
+          <div key={h.id || idx} className="flex items-start gap-3 p-2.5 rounded-2xl hover:bg-[#FAF0F8] transition-colors">
+            <div className="w-7 h-7 rounded-xl bg-[#400849] text-[#FF5A0A] flex items-center justify-center font-black text-xs shrink-0 shadow-2xs">
               {idx + 1}
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-0.5">
-                <span className="text-xs font-bold text-[#161327] truncate">
+                <span className="text-xs font-bold text-[#400849] truncate">
                   {h.title}
                 </span>
                 <span
-                  className={`text-[9px] font-bold px-1.5 py-0.2 rounded uppercase ${
+                  className={`text-[9px] font-black px-1.5 py-0.5 rounded uppercase ${
                     h.type === "positive"
                       ? "bg-[#10B981]/15 text-[#10B981]"
                       : h.type === "negative"
-                      ? "bg-[#F43F5E]/15 text-[#F43F5E]"
-                      : "bg-[#6D4AFF]/15 text-[#6D4AFF]"
+                      ? "bg-[#E11D48]/15 text-[#E11D48]"
+                      : "bg-[#FFF2EC] text-[#FF5A0A]"
                   }`}
                 >
                   {h.tag}
                 </span>
               </div>
-              <p className="text-[11px] text-[#625D7E] leading-relaxed">
+              <p className="text-[11px] text-[#71367B] leading-relaxed">
                 {h.description}
               </p>
             </div>

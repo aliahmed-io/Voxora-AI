@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Info, Sparkles } from "lucide-react";
+import { Info } from "lucide-react";
 
 interface TopicRadarMetric {
   name: string;
@@ -126,12 +126,12 @@ export function TopicRadarChart({ onSwitchMode }: TopicRadarChartProps = {}) {
   return (
     <div className="p-5 rounded-3xl bg-white border border-[#E7B0DE]/40 shadow-sm flex flex-col justify-between h-full">
       {/* Header */}
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex items-center gap-1.5">
-          <h2 className="text-xs font-black text-[#400849] tracking-tight">
+      <div className="flex items-center justify-between gap-2 mb-2">
+        <div className="flex items-center gap-1.5 min-w-0">
+          <h2 className="text-xs font-black text-[#400849] tracking-tight whitespace-nowrap">
             Topic Resonance Vector
           </h2>
-          <div className="group relative">
+          <div className="group relative shrink-0">
             <Info className="w-3 h-3 text-[#A872AF] cursor-pointer" />
             <div className="absolute left-0 bottom-full mb-1.5 hidden group-hover:block w-52 p-2 bg-[#400849] text-white text-[10px] rounded-xl shadow-xl z-30 leading-snug border border-[#E7B0DE]/40">
               5-dimensional radar mapping feedback intensity, sentiment polarity, and churn vulnerability across topics.
@@ -140,22 +140,16 @@ export function TopicRadarChart({ onSwitchMode }: TopicRadarChartProps = {}) {
         </div>
 
         {/* Action Controls */}
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1.5 shrink-0">
           {onSwitchMode && (
             <button
               onClick={onSwitchMode}
-              className="px-2 py-0.5 rounded-lg bg-[#FAF0F8] hover:bg-[#F3DCF0] border border-[#E7B0DE]/40 text-[9px] font-black text-[#71367B] transition-colors"
+              className="px-2.5 py-1 rounded-lg bg-[#FAF0F8] hover:bg-[#F3DCF0] border border-[#E7B0DE]/40 text-[9.5px] font-black text-[#71367B] transition-colors whitespace-nowrap"
               title="Switch to Category Progress Bars"
             >
               Show Bars
             </button>
           )}
-
-          {/* Selected Topic Badge */}
-          <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#FFF2EC] border border-[#FF5A0A]/20 text-[9.5px] font-black text-[#FF5A0A]">
-            <Sparkles className="w-2.5 h-2.5" />
-            <span className="max-w-[70px] truncate">{selectedTopic.name.split(" ")[0]}</span>
-          </div>
         </div>
       </div>
 
@@ -268,21 +262,25 @@ export function TopicRadarChart({ onSwitchMode }: TopicRadarChartProps = {}) {
       </div>
 
       {/* Interactive Topic Pill Switcher */}
-      <div className="flex items-center justify-between gap-1 mt-2 pt-2 border-t border-[#E7B0DE]/30">
+      <div className="flex flex-wrap items-center justify-center gap-1.5 mt-2 pt-2 border-t border-[#E7B0DE]/30">
         {TOPICS_DATA.map((t, idx) => {
           const isSelected = idx === selectedTopicIdx;
           return (
             <button
               key={t.name}
               onClick={() => setSelectedTopicIdx(idx)}
-              className={`px-1.5 py-1 rounded-lg text-[9px] font-black transition-all truncate flex-1 text-center ${
+              className={`px-2.5 py-1 rounded-xl text-[10px] font-black transition-all flex items-center gap-1.5 ${
                 isSelected
                   ? "bg-[#400849] text-white shadow-xs"
-                  : "bg-[#FAF0F8] text-[#71367B] hover:text-[#400849]"
+                  : "bg-[#FAF0F8] text-[#71367B] hover:bg-[#F3DCF0] hover:text-[#400849]"
               }`}
               title={t.name}
             >
-              {t.name.split(" ")[0]}
+              <span
+                className="w-1.5 h-1.5 rounded-full shrink-0"
+                style={{ backgroundColor: isSelected ? "#FF5A0A" : t.color }}
+              />
+              <span>{t.name}</span>
             </button>
           );
         })}

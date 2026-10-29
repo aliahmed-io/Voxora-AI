@@ -17,22 +17,22 @@ export function ConfusionMatrixGrid({ matrix, labels }: ConfusionMatrixGridProps
   }));
 
   return (
-    <div className="p-6 rounded-2xl bg-white border border-[#6D4AFF]/10 shadow-sm">
-      <div className="flex items-center justify-between mb-4">
+    <div className="p-6 rounded-3xl bg-white border border-[#E7B0DE]/40 shadow-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <div>
-          <h3 className="text-sm font-bold text-[#161327] tracking-tight">
+          <h3 className="text-xs font-black text-[#400849] tracking-tight">
             Confusion Matrix (Untouched Test Split)
           </h3>
-          <p className="text-xs text-[#625D7E] mt-0.5">
+          <p className="text-[11px] text-[#A872AF] mt-0.5">
             Cross-tabulation of ground-truth test labels vs champion model predictions
           </p>
         </div>
         <div className="flex items-center gap-3 text-xs">
-          <span className="flex items-center gap-1.5 text-[#6D4AFF] font-semibold text-[11px]">
-            <span className="w-2.5 h-2.5 rounded bg-[#6D4AFF]" /> Correct Predictions
+          <span className="flex items-center gap-1.5 text-[#10B981] font-bold text-[10px] uppercase">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#10B981]" /> Hits
           </span>
-          <span className="flex items-center gap-1.5 text-[#F43F5E] font-semibold text-[11px]">
-            <span className="w-2.5 h-2.5 rounded bg-[#F43F5E]" /> Classification Errors
+          <span className="flex items-center gap-1.5 text-[#E11D48] font-bold text-[10px] uppercase">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#E11D48]" /> Errors
           </span>
         </div>
       </div>
@@ -40,12 +40,12 @@ export function ConfusionMatrixGrid({ matrix, labels }: ConfusionMatrixGridProps
       <div className="overflow-x-auto">
         <table className="w-full text-center border-collapse text-xs">
           <thead>
-            <tr>
-              <th className="p-2 text-left font-bold text-[#9B94B8] uppercase text-[10px]">
+            <tr className="bg-[#FAF0F8]">
+              <th className="p-2.5 text-left font-black text-[#A872AF] uppercase text-[10px]">
                 True \ Predicted
               </th>
               {labels.map((lbl) => (
-                <th key={lbl} className="p-2 font-bold text-[#161327] uppercase text-[11px]">
+                <th key={lbl} className="p-2.5 font-black text-[#400849] uppercase text-[10px]">
                   Pred: {lbl}
                 </th>
               ))}
@@ -53,27 +53,27 @@ export function ConfusionMatrixGrid({ matrix, labels }: ConfusionMatrixGridProps
           </thead>
           <tbody>
             {labels.map((trueLbl, rIdx) => (
-              <tr key={trueLbl} className="border-t border-[#ECE7FF]">
-                <td className="p-3 text-left font-bold text-[#161327] uppercase text-[11px] bg-[#FAF8FF]">
+              <tr key={trueLbl} className="border-t border-[#E7B0DE]/30">
+                <td className="p-3 text-left font-bold text-[#400849] uppercase text-[10px] bg-[#FAF0F8]">
                   True: {trueLbl}
                 </td>
                 {matrix[rIdx]?.map((val, cIdx) => {
                   const isDiagonal = rIdx === cIdx;
                   const cellClass =
                     isDiagonal && val > 0
-                      ? "bg-[#6D4AFF]/15 text-[#6D4AFF] font-extrabold"
+                      ? "bg-[#10B981]/15 text-[#10B981] font-black"
                       : !isDiagonal && val > 0
-                      ? "bg-[#F43F5E]/15 text-[#F43F5E] font-bold"
-                      : "bg-white text-[#161327]";
+                      ? "bg-[#FFE4E6] text-[#E11D48] font-black"
+                      : "bg-white text-[#400849]";
 
                   return (
                     <td
                       key={cIdx}
-                      className={`p-3 text-sm transition-colors border border-[#ECE7FF] ${cellClass}`}
+                      className={`p-3 text-sm transition-colors border border-[#E7B0DE]/30 ${cellClass}`}
                     >
                       <div className="flex flex-col items-center justify-center">
                         <span className="font-mono text-base">{val}</span>
-                        <span className="text-[10px] opacity-70">
+                        <span className="text-[9.5px] uppercase font-black opacity-80">
                           {isDiagonal ? "Hit" : val > 0 ? "Miss" : "—"}
                         </span>
                       </div>
