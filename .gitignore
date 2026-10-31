@@ -23,6 +23,8 @@ frontend/.pnpm-store/
 *.sqlite3
 *.db
 *.log
+backend_port.json
+frontend/public/backend_port.json
 backend/app/data/uploads/*.csv
 
 # Operating System
