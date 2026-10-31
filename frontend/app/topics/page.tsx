@@ -7,6 +7,7 @@ import { TopicCard } from "@/components/topics/TopicCard";
 import { TopicRadarChart } from "@/components/dashboard/TopicRadarChart";
 import { api } from "@/lib/api";
 import { TopicSummary } from "@/lib/types";
+import { resolveDefaultDataset, setStoredDatasetId } from "@/lib/dataset-store";
 import { HelpCircle } from "lucide-react";
 import {
   ResponsiveContainer,
@@ -27,12 +28,24 @@ export default function TopicsPage() {
     let ignore = false;
     api.getDatasets().then((ds) => {
       if (!ignore && ds && ds.length > 0) {
-        const id = ds[0]?.id ?? "";
-        setActiveDatasetId(id);
+        const chosen = resolveDefaultDataset(ds);
+        if (chosen) {
+          setActiveDatasetId(chosen.id);
+        }
       }
     });
+
+    const handleDatasetEvent = (e: Event) => {
+      const customEvent = e as CustomEvent<string>;
+      if (customEvent.detail) {
+        setActiveDatasetId(customEvent.detail);
+      }
+    };
+
+    window.addEventListener("voxora:dataset-change", handleDatasetEvent);
     return () => {
       ignore = true;
+      window.removeEventListener("voxora:dataset-change", handleDatasetEvent);
     };
   }, []);
 
@@ -66,7 +79,10 @@ export default function TopicsPage() {
       <div className="flex-1 flex flex-col min-w-0">
         <Navbar
           currentDatasetId={activeDatasetId}
-          onDatasetChange={setActiveDatasetId}
+          onDatasetChange={(id) => {
+            setStoredDatasetId(id);
+            setActiveDatasetId(id);
+          }}
         />
 
         <main className="flex-1 p-6 md:p-8 space-y-6 max-w-7xl mx-auto w-full">

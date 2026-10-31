@@ -5,6 +5,7 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import { Navbar } from "@/components/layout/Navbar";
 import { api } from "@/lib/api";
 import { DashboardStats, AIExecutiveSynthesis } from "@/lib/types";
+import { resolveDefaultDataset, setStoredDatasetId } from "@/lib/dataset-store";
 import {
   FileSpreadsheet,
   Download,
@@ -24,12 +25,24 @@ export default function ReportsPage() {
     let ignore = false;
     api.getDatasets().then((ds) => {
       if (!ignore && ds && ds.length > 0) {
-        const id = ds[0]?.id ?? "";
-        setActiveDatasetId(id);
+        const chosen = resolveDefaultDataset(ds);
+        if (chosen) {
+          setActiveDatasetId(chosen.id);
+        }
       }
     });
+
+    const handleDatasetEvent = (e: Event) => {
+      const customEvent = e as CustomEvent<string>;
+      if (customEvent.detail) {
+        setActiveDatasetId(customEvent.detail);
+      }
+    };
+
+    window.addEventListener("voxora:dataset-change", handleDatasetEvent);
     return () => {
       ignore = true;
+      window.removeEventListener("voxora:dataset-change", handleDatasetEvent);
     };
   }, []);
 
@@ -66,7 +79,10 @@ export default function ReportsPage() {
       <div className="flex-1 flex flex-col min-w-0">
         <Navbar
           currentDatasetId={activeDatasetId}
-          onDatasetChange={setActiveDatasetId}
+          onDatasetChange={(id) => {
+            setStoredDatasetId(id);
+            setActiveDatasetId(id);
+          }}
         />
 
         <main className="flex-1 p-6 md:p-8 space-y-6 max-w-5xl mx-auto w-full">

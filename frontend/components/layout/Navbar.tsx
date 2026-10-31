@@ -15,6 +15,7 @@ import { api } from "@/lib/api";
 import { DatasetBrief } from "@/lib/types";
 import { Logo } from "./Logo";
 import { cn } from "@/lib/utils";
+import { resolveDefaultDataset, setStoredDatasetId } from "@/lib/dataset-store";
 
 interface NavbarProps {
   currentDatasetId?: string;
@@ -33,7 +34,8 @@ export function Navbar({ currentDatasetId, onDatasetChange }: NavbarProps) {
     api.getDatasets().then(setDatasets).catch(() => {});
   }, [pathname]);
 
-  const activeDataset = datasets.find((d) => d.id === currentDatasetId) || datasets[0];
+  const activeDataset =
+    datasets.find((d) => d.id === currentDatasetId) || resolveDefaultDataset(datasets);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -126,6 +128,7 @@ export function Navbar({ currentDatasetId, onDatasetChange }: NavbarProps) {
                   <button
                     key={d.id}
                     onClick={() => {
+                      setStoredDatasetId(d.id);
                       if (onDatasetChange) onDatasetChange(d.id);
                       setIsOpen(false);
                     }}

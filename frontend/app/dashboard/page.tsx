@@ -15,6 +15,7 @@ import { RecentFeedback } from "@/components/dashboard/RecentFeedback";
 import { api } from "@/lib/api";
 import { DashboardStats } from "@/lib/types";
 import { UploadCloud } from "lucide-react";
+import { resolveDefaultDataset, getStoredDatasetId, setStoredDatasetId } from "@/lib/dataset-store";
 
 export default function DashboardPage() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
@@ -22,39 +23,105 @@ export default function DashboardPage() {
   const [error, setError] = useState<string | null>(null);
   const [topicVizMode, setTopicVizMode] = useState<"bars" | "radar">("radar");
 
-  useEffect(() => {
-    let ignore = false;
-    async function load() {
-      try {
-        const data = await api.getLatestDashboard();
-        if (!ignore) setStats(data);
-      } catch (err: unknown) {
-        if (!ignore) {
-          const msg = err instanceof Error ? err.message : "Failed to load dashboard data.";
-          setError(msg);
-        }
-      } finally {
-        if (!ignore) setLoading(false);
-      }
-    }
-    load();
-    return () => {
-      ignore = true;
-    };
-  }, []);
-
-  const handleDatasetChange = async (id: string) => {
+  const loadDashboard = React.useCallback(async (targetId?: string) => {
     try {
       setLoading(true);
       setError(null);
-      const data = await api.getDatasetDashboard(id);
-      setStats(data);
+      if (targetId) {
+        const data = await api.getDatasetDashboard(targetId);
+        setStats(data);
+        return;
+      }
+
+      const storedId = getStoredDatasetId();
+      if (storedId) {
+        try {
+          const data = await api.getDatasetDashboard(storedId);
+          setStats(data);
+          return;
+        } catch {
+          // Fall through to resolve from all datasets if stored id is no longer valid
+        }
+      }
+
+      const datasets = await api.getDatasets();
+      const defaultDs = resolveDefaultDataset(datasets);
+      if (defaultDs) {
+        setStoredDatasetId(defaultDs.id);
+        const data = await api.getDatasetDashboard(defaultDs.id);
+        setStats(data);
+      } else {
+        const data = await api.getLatestDashboard();
+        setStats(data);
+      }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Failed to load dashboard data.";
       setError(msg);
     } finally {
       setLoading(false);
     }
+  }, []);
+
+  useEffect(() => {
+    let ignore = false;
+    async function fetchInitial() {
+      try {
+        let data: DashboardStats;
+        const storedId = getStoredDatasetId();
+        if (storedId) {
+          try {
+            data = await api.getDatasetDashboard(storedId);
+            if (!ignore) {
+              setStats(data);
+              setLoading(false);
+            }
+            return;
+          } catch {
+            // fall through
+          }
+        }
+
+        const datasets = await api.getDatasets();
+        const defaultDs = resolveDefaultDataset(datasets);
+        if (defaultDs) {
+          setStoredDatasetId(defaultDs.id);
+          data = await api.getDatasetDashboard(defaultDs.id);
+        } else {
+          data = await api.getLatestDashboard();
+        }
+
+        if (!ignore) {
+          setStats(data);
+          setLoading(false);
+        }
+      } catch (err: unknown) {
+        if (!ignore) {
+          const msg = err instanceof Error ? err.message : "Failed to load dashboard data.";
+          setError(msg);
+          setLoading(false);
+        }
+      }
+    }
+
+    fetchInitial();
+
+    const handleDatasetEvent = (e: Event) => {
+      const customEvent = e as CustomEvent<string>;
+      if (customEvent.detail && customEvent.detail !== stats?.dataset_id) {
+        loadDashboard(customEvent.detail);
+      }
+    };
+
+    window.addEventListener("voxora:dataset-change", handleDatasetEvent);
+    return () => {
+      ignore = true;
+      window.removeEventListener("voxora:dataset-change", handleDatasetEvent);
+    };
+  }, [loadDashboard, stats?.dataset_id]);
+
+  const handleDatasetChange = async (id: string) => {
+    setStoredDatasetId(id);
+    await loadDashboard(id);
   };
 
   return (

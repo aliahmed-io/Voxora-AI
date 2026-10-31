@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import {
   LayoutDashboard,
   MessageSquareText,
@@ -15,25 +15,94 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "./Logo";
+import { api } from "@/lib/api";
+import { TopicSummary, DatasetBrief } from "@/lib/types";
+import { resolveDefaultDataset, getStoredDatasetId } from "@/lib/dataset-store";
 
-const NAV_ITEMS = [
-  { label: "Overview", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Reviews", href: "/reviews", icon: MessageSquareText, badge: "986" },
-  { label: "Topics", href: "/topics", icon: Layers, badge: "5" },
-  { label: "Model Evaluation", href: "/model", icon: Cpu, badge: "100%" },
-  { label: "Reports", href: "/reports", icon: FileSpreadsheet },
+const FALLBACK_TOPICS = [
+  { name: "Customer Support & Resolution", count: 77 },
+  { name: "Platform Performance & System Stability", count: 65 },
+  { name: "Shipping, Packaging & Fulfillment", count: 47 },
+  { name: "Billing, Subscriptions & Invoicing", count: 35 },
+  { name: "User Interface & Onboarding Experience", count: 26 },
 ];
 
-const TOPIC_COLLECTIONS = [
-  { name: "Customer Support", count: 276, active: false },
-  { name: "Platform Stability", count: 414, active: true },
-  { name: "UI & Usability", count: 177, active: false },
-  { name: "Pricing & Billing", count: 85, active: false },
-  { name: "Feature Requests", count: 34, active: false },
-];
-
-export function Sidebar() {
+function SidebarContent() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const activeTopic = searchParams.get("topic") || "";
+
+  const [topics, setTopics] = useState<Array<{ name: string; count: number }>>(FALLBACK_TOPICS);
+  const [totalReviews, setTotalReviews] = useState<number>(986);
+  const [totalTopicsCount, setTotalTopicsCount] = useState<number>(5);
+
+  const fetchDatasetInfo = React.useCallback((targetDatasetId?: string) => {
+    let ignore = false;
+    api.getDatasets()
+      .then((datasets: DatasetBrief[]) => {
+        if (ignore || !datasets || datasets.length === 0) return;
+        const activeDs = targetDatasetId
+          ? datasets.find((d) => d.id === targetDatasetId) || resolveDefaultDataset(datasets)
+          : resolveDefaultDataset(datasets);
+
+        if (activeDs) {
+          setTotalReviews(activeDs.row_count);
+          api.getTopics(activeDs.id)
+            .then((res: TopicSummary[]) => {
+              if (!ignore && res && res.length > 0) {
+                setTotalTopicsCount(res.length);
+                setTopics(
+                  res.map((t) => ({
+                    name: t.name,
+                    count: t.review_count,
+                  }))
+                );
+              }
+            })
+            .catch(() => {});
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    const cleanup = fetchDatasetInfo(getStoredDatasetId() || undefined);
+
+    const handleDatasetEvent = (e: Event) => {
+      const customEvent = e as CustomEvent<string>;
+      if (customEvent.detail) {
+        fetchDatasetInfo(customEvent.detail);
+      }
+    };
+
+    window.addEventListener("voxora:dataset-change", handleDatasetEvent);
+    return () => {
+      cleanup();
+      window.removeEventListener("voxora:dataset-change", handleDatasetEvent);
+    };
+  }, [pathname, fetchDatasetInfo]);
+
+  const navItems = [
+    { label: "Overview", href: "/dashboard", icon: LayoutDashboard },
+    {
+      label: "Reviews",
+      href: "/reviews",
+      icon: MessageSquareText,
+      badge: totalReviews ? totalReviews.toLocaleString() : undefined,
+    },
+    {
+      label: "Topics",
+      href: "/topics",
+      icon: Layers,
+      badge: totalTopicsCount ? String(totalTopicsCount) : undefined,
+    },
+    { label: "Model Evaluation", href: "/model", icon: Cpu, badge: "100%" },
+    { label: "Reports", href: "/reports", icon: FileSpreadsheet },
+  ];
 
   return (
     <aside
@@ -62,9 +131,9 @@ export function Sidebar() {
 
         {/* Primary Navigation Menu (30% Deep Eggplant Structure) */}
         <nav className="space-y-1">
-          {NAV_ITEMS.map((item) => {
+          {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = pathname === item.href;
+            const isActive = pathname === item.href && (item.href !== "/reviews" || !activeTopic);
             return (
               <Link
                 key={item.href}
@@ -118,33 +187,49 @@ export function Sidebar() {
           </div>
 
           <div className="space-y-1">
-            {TOPIC_COLLECTIONS.map((col) => (
-              <Link
-                key={col.name}
-                href={`/reviews?topic=${encodeURIComponent(col.name)}`}
-                className={cn(
-                  "flex items-center justify-between px-3.5 py-1.5 rounded-lg text-xs transition-colors",
-                  col.active
-                    ? "text-[#400849] font-bold bg-[#FAEEF7]"
-                    : "text-[#71367B] hover:text-[#400849] hover:bg-[#FAF0F8]"
-                )}
-              >
-                <div className="flex items-center gap-2 truncate">
-                  <Folder
+            {topics.map((col) => {
+              const isColActive = pathname === "/reviews" && activeTopic === col.name;
+              // Clicking active collection toggles it off back to all reviews
+              const targetHref = isColActive
+                ? "/reviews"
+                : `/reviews?topic=${encodeURIComponent(col.name)}`;
+
+              return (
+                <Link
+                  key={col.name}
+                  href={targetHref}
+                  className={cn(
+                    "flex items-center justify-between px-3.5 py-1.5 rounded-lg text-xs transition-colors",
+                    isColActive
+                      ? "text-[#400849] font-bold bg-[#FAEEF7] shadow-2xs"
+                      : "text-[#71367B] hover:text-[#400849] hover:bg-[#FAF0F8]"
+                  )}
+                  title={isColActive ? `Clear filter: ${col.name}` : `Filter reviews by: ${col.name}`}
+                >
+                  <div className="flex items-center gap-2 truncate">
+                    <Folder
+                      className={cn(
+                        "w-3.5 h-3.5 shrink-0",
+                        isColActive ? "text-[#FF5A0A] fill-[#FF5A0A]/20" : "text-[#A872AF]"
+                      )}
+                    />
+                    <span className="truncate">{col.name}</span>
+                  </div>
+                  <span
                     className={cn(
-                      "w-3.5 h-3.5 shrink-0",
-                      col.active ? "text-[#FF5A0A]" : "text-[#A872AF]"
+                      "text-[10px] font-bold shrink-0 ml-1.5",
+                      isColActive ? "text-[#FF5A0A]" : "text-[#A872AF]"
                     )}
-                  />
-                  <span className="truncate">{col.name}</span>
-                </div>
-                <span className="text-[10px] font-bold text-[#A872AF]">{col.count}</span>
-              </Link>
-            ))}
+                  >
+                    {col.count}
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </div>
 
-        {/* Upgrade / AI Synthesis Card (60% Pastel Orchid + 30% Eggplant Button) */}
+        {/* Upgrade / AI Synthesis Card */}
         <div className="p-3.5 rounded-2xl bg-gradient-to-br from-[#FAEEF7] to-[#F3DCF0] border border-[#E7B0DE]/60 shadow-xs">
           <div className="flex items-center gap-1.5 mb-1 text-[#400849]">
             <Sparkles className="w-3.5 h-3.5 text-[#FF5A0A]" />
@@ -179,5 +264,22 @@ export function Sidebar() {
         </div>
       </div>
     </aside>
+  );
+}
+
+export function Sidebar() {
+  return (
+    <Suspense
+      fallback={
+        <aside
+          aria-label="Sidebar Navigation"
+          className="hidden md:flex flex-col w-64 bg-white text-[#400849] min-h-screen border-r border-[#E7B0DE]/40 select-none shrink-0 p-5"
+        >
+          <div className="text-xs text-[#A872AF]">Loading navigation...</div>
+        </aside>
+      }
+    >
+      <SidebarContent />
+    </Suspense>
   );
 }

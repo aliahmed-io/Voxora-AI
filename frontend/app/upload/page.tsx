@@ -6,6 +6,7 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import { Navbar } from "@/components/layout/Navbar";
 import { api } from "@/lib/api";
 import { UploadPreviewResponse, JobStatusResponse } from "@/lib/types";
+import { setStoredDatasetId } from "@/lib/dataset-store";
 import {
   UploadCloud,
   AlertCircle,
@@ -103,6 +104,9 @@ export default function UploadPage() {
 
           if (status.status === "completed") {
             clearInterval(pollInterval);
+            if (status.dataset_id) {
+              setStoredDatasetId(status.dataset_id);
+            }
             router.push("/dashboard");
           } else if (status.status === "failed") {
             clearInterval(pollInterval);
