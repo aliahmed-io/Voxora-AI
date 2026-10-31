@@ -7,6 +7,13 @@ export const metadata: Metadata = {
   description:
     "Defensible customer sentiment classification, NMF topic modeling, and token-level explainability for enterprise customer intelligence.",
   keywords: ["customer feedback", "sentiment analysis", "topic modeling", "NMF", "FastAPI", "Next.js"],
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({

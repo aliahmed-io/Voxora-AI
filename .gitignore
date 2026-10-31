@@ -29,5 +29,6 @@ backend/app/data/uploads/*.csv
 
 # Operating System
 .DS_Store
-Thumbs.db
 *.png
+!docs/images/*.png
+!frontend/public/docs/images/*.png

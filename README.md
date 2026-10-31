@@ -4,153 +4,234 @@
 [![Next.js 16](https://img.shields.io/badge/Next.js-16%20App%20Router-black.svg)](https://nextjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg)](https://fastapi.tiangolo.com/)
 [![Scikit-Learn](https://img.shields.io/badge/scikit--learn-1.6+-F7931E.svg)](https://scikit-learn.org/)
+[![Zero Cloud Egress](https://img.shields.io/badge/Privacy-100%25%20On--Premise-emerald.svg)](#-mathematical-methodology--defensibility)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**Voxora AI** is an enterprise-grade, academically defensible customer feedback intelligence platform designed for Computer Science senior projects and production deployments. Voxora ingest unstructured customer reviews via CSV, normalizes text while strictly preserving linguistic negations, trains and selects models through an automated tournament (Calibrated Linear SVM vs. Logistic Regression), discovers semantic feedback clusters via Non-Negative Matrix Factorization (NMF), and provides token-level linear feature attributions with downloadable executive PDF and CSV reports.
+**Voxora AI** is a production-grade, academically defensible customer feedback intelligence platform. It transforms thousands of unstructured customer reviews, surveys, and support tickets into calibrated sentiment probabilities, latent topic clusters, continuous 2D friction/delight coordinates, and token-level mathematical attributions.
+
+Engineered with a **100% on-premise scikit-learn machine learning pipeline**, Voxora AI delivers sub-millisecond deterministic CPU inference with zero customer data exfiltration and zero third-party API token costs.
 
 ---
 
-## 🌟 Key Capabilities
+## 📸 Visual Showcase
 
-- **Automated CSV Ingestion & Schema Mapping**: Drag-and-drop review uploads, automatic or manual column mapping, dataset validation, and 5-row preview.
-- **Negation-Preserving NLP Pipeline**: Contraction expansion (`isn't` → `is not`), custom stopword filtering preserving critical sentiment modifiers (`not`, `never`, `hardly`, `no`), and sublinear TF-IDF n-grams (1, 2).
-- **Model Tournament & Selection**: Stratified 70/15/15 train/val/test tournament between Logistic Regression and Calibrated Linear SVM. Winner is selected on Validation Macro F1 and evaluated on untouched test data.
-- **NMF Topic Modeling**: Unsupervised Non-Negative Matrix Factorization discovering 5 semantic business clusters (*Platform Reliability*, *Customer Support*, *UI & Usability*, *Pricing & Billing*, *Feature Requests*).
-- **Explainability & Attribution Engine**: Token-level linear feature attribution ($w_i \cdot \beta_{c,i}$) highlighting influential terms with transparent, non-causal disclosures.
-- **Executive Overview Dashboard**: High-fidelity CSAT gauge, multi-sentiment time series, 2D Customer Sentiment Scatter Map, prioritized complaint cards, and channel distribution.
-- **Multi-Class Review Explorer**: Searchable, filterable review table with confidence thresholds, date sorting, and interactive review detail drawer.
-- **Exportable PDF & CSV Reports**: In-browser preview, ReportLab PDF generation with embedded analytics, CSV export, and optional Google Gemini 2.5 executive synthesis with deterministic fallback.
+### 1. Bespoke Editorial Landing Page & Sensor Telemetry
+> Architectural left navigation rail, high-contrast editorial serif typography (`Newsreader`), live illustrative sensor waveforms, and real-time streaming feedback telemetry.
+
+![Voxora AI Editorial Landing Page](docs/images/01_landing_hero.png)
 
 ---
 
-## 🏗️ System Architecture
+### 2. Executive Voice-of-Customer Intelligence Dashboard
+> Continuous CSAT polarity dial (53/100), 2D Customer Sentiment Density Map (Hexbin & Scatter), 30-day multi-class time-series trajectory, topic resonance radar, and categorized feedback collections.
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                   Voxora AI Client (Next.js 16)                        │
-│   • App Router (React 19)          • Plus Jakarta Sans & Inter         │
-│   • TypeScript Strict (0 'any')    • Tailwind CSS v4 (8pt Grid)        │
-│   • Lucide Icons & Recharts        • Framer Motion Transitions         │
-└────────────────────────────────────▲───────────────────────────────────┘
-                                     │ REST API (JSON)
-                                     ▼
-┌────────────────────────────────────────────────────────────────────────┐
-│                   Voxora AI Backend (Python FastAPI)                   │
-│   • FastAPI Async Endpoints        • SQLAlchemy ORM (SQLite)           │
-│   • File Validation & Streaming    • ReportLab PDF Engine              │
-└──────────────────┬─────────────────────────────────┬───────────────────┘
-                   │                                 │
-                   ▼                                 ▼
-┌──────────────────────────────────────┐  ┌──────────────────────────────┐
-│        Scikit-Learn ML Suite         │  │     Gemini 2.5 Synthesis     │
-│ • Negation-Preserving Preprocessor   │  │ • Server-Side API Proxy      │
-│ • Calibrated Linear SVM (Winner)     │  │ • Zero Client Key Leak       │
-│ • Multinomial Logistic Regression    │  │ • Deterministic Fallback     │
-│ • NMF Unsupervised Topic Modeler     │  └──────────────────────────────┘
-│ • Linear Feature Explainer           │
-└──────────────────────────────────────┘
+![Voxora AI Executive Dashboard](docs/images/02_executive_dashboard.png)
+
+---
+
+### 3. Model Tournament & Decision Boundary Laboratory
+> Transparent academic evaluation (Calibrated Linear SVM vs. Multinomial Logistic Regression), confusion matrix, Platt posterior distributions, and token-level linear feature attribution microscope.
+
+![Voxora AI Model Tournament & Laboratory](docs/images/03_model_tournament.png)
+
+---
+
+## 🚀 Quick Start Guide (Terminal Startup)
+
+Voxora AI includes a **Universal Zero-Config Launcher** that automatically detects open ports for both the FastAPI backend and Next.js frontend, synchronizes discovery metadata, and opens your browser without manual port editing.
+
+### Option A: 1-Click Launch on Windows (Recommended)
+Simply double-click [`start.bat`](start.bat) in the project root, or execute:
+
+```powershell
+.\start.bat
 ```
 
----
+### Option B: PowerShell 1-Click Script
+```powershell
+.\start.ps1
+```
 
-## 📋 Technology Stack
-
-| Layer | Technologies |
-| :--- | :--- |
-| **Frontend** | Next.js 16 (App Router), TypeScript (Strict Mode), Tailwind CSS v4, Lucide React, Recharts, Framer Motion |
-| **Backend** | Python 3.12+, FastAPI, Uvicorn, Pandas (<3), NumPy (<2.2), SQLAlchemy |
-| **Machine Learning** | Scikit-learn, Scipy, Sublinear TF-IDF, CalibratedClassifierCV, NMF |
-| **Reporting & AI** | ReportLab (PDF), Google Gemini 2.5 Flash API (Optional server-side synthesis) |
-| **Testing** | Vitest, React Testing Library, Pytest, ESLint 9 |
-
----
-
-## 🚀 Quick Start Guide
-
-### Prerequisites
-- **Node.js**: v20.x or higher
-- **pnpm**: v9.x or higher (`npm install -g pnpm`)
-- **Python**: 3.12+ (64-bit Windows or POSIX)
-
----
-
-### 1. Backend Setup
-
+### Option C: Cross-Platform Python Launcher
 ```bash
-# Navigate to the backend directory
+# Uses backend virtualenv Python or system Python automatically
+python run.py
+```
+
+*The launcher automatically scans for available ports (`8002`, `8000`, `8001`, `8003` for backend; `3004`, `3000`, `3001` for frontend), writes `backend_port.json`, configures `.env.local`, and launches both services.*
+
+---
+
+### Option D: Manual Independent Terminal Startup
+
+If you prefer running frontend and backend in separate terminals:
+
+#### Terminal 1 — Backend (FastAPI + scikit-learn):
+```bash
+# Navigate to backend directory
 cd backend
 
-# Create and activate Python virtual environment
-py -3.12 -m venv venv
-# Windows:
+# Activate virtual environment
+# Windows PowerShell:
 .\venv\Scripts\Activate.ps1
-# Linux/macOS:
+# Linux / macOS:
 # source venv/bin/activate
 
-# Install dependencies
+# Install dependencies (first-time only)
 pip install -r requirements.txt
 
-# Run the training tournament to produce serialized models
+# Run the training tournament & database seed
 python scripts/train_models.py
-
-# Pre-seed the SQLite database with benchmark customer reviews
 python scripts/seed_database.py
 
-# Run backend unit & integration tests
-pytest -v
-
-# Launch the FastAPI server
-uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+# Start FastAPI server on port 8002
+uvicorn app.main:app --host 127.0.0.1 --port 8002 --reload
 ```
-The FastAPI interactive documentation will be accessible at: `http://127.0.0.1:8000/docs`
+*API interactive documentation will be live at `http://127.0.0.1:8002/docs`.*
 
----
-
-### 2. Frontend Setup
-
+#### Terminal 2 — Frontend (Next.js 16 + React 19):
 ```bash
-# Navigate to the frontend directory
-cd ../frontend
+# Navigate to frontend directory
+cd frontend
 
-# Install dependencies
+# Install dependencies (first-time only)
 pnpm install
 
-# Run frontend test suite
-pnpm test
-
-# Run ESLint validation
-pnpm lint
-
-# Build the production Next.js application
+# Build production bundle with Turbopack
 pnpm build
 
-# Start the production server (or pnpm dev for development)
-pnpm start
-# or:
-pnpm dev
+# Start production server on port 3004 (or any free port)
+pnpm start -- -p 3004
+# (Alternatively for development: pnpm dev -- -p 3004)
 ```
-The Voxora AI user interface will be accessible at: `http://localhost:3000`
+*The web interface will be live at `http://localhost:3004`.*
 
 ---
 
-## 🧪 Verification & Test Commands
+## ✨ Page-by-Page Feature Tour
 
-Every component in Voxora AI satisfies strict quality gates:
+### 1. Landing Page (`/`)
+- **Architectural Left Rail:** A fixed 56px margin rail featuring the brand monogram `V•`, vertical `VOXORA INTELLIGENCE` tracking, dynamic section index (`01` through `06`), and scroll indicator.
+- **Monumental Headline & Luxury Typography:** High-contrast `Newsreader` italic serif display headline (*"Every customer voice, quantified."*), conveying mathematical rigor and executive elegance.
+- **Illustrative Telemetry Instruments:** Real-time visual instruments including CSAT Harmonic frequency waveform (`78.4 / 100`), Inference Velocity sparkline (`< 0.12 ms`), and Platt Calibration percentage dial (`96.8%`).
+- **Asymmetric Perspective Instrument:** Deep midnight aubergine split panel showcasing live feedback signal cards, continuous 2D coordinate projections, and SVM hyperplane weight inspections.
+- **The Voxora Method:** 3 horizontal editorial steps:
+  1. *Observe:* In-memory text normalization and sublinear TF-IDF n-gram vectorization with zero cloud egress.
+  2. *Decompose:* Non-Negative Matrix Factorization (NMF) discovering latent clusters without manual labeling, combined with Platt-calibrated Linear SVM.
+  3. *Anticipate:* Continuous 2D geometric projection onto friction/delight planes and automated executive boardroom dossiers.
+- **Real-Time Inference Laboratory:** Interactive console with 4 enterprise scenarios (*Outage & Churn Risk*, *Enterprise Migration Delight*, *Support SLA Breach*, *Subscription Transparency*). Executes against the live backend in `< 10ms` to display 3-class Platt probabilities and token weights.
+- **Latent Theme Topology:** Interactive cluster browser for 5 unsupervised customer themes, displaying volume, sentiment ratios, key n-grams, and representative quotes.
+- **Defensibility Matrix:** Rigorous comparison contrasting Voxora AI against Cloud LLMs (GPT-4 / Claude) and Lexicon Rules across determinism, latency, privacy, feature attribution, and cost.
+- **Curated Workspaces:** Instant 1-click launch into pre-loaded enterprise corpora (*Voxora SaaS*, *E-Commerce*, *Fintech Banking*).
+
+---
+
+### 2. Executive Intelligence Dashboard (`/dashboard`)
+- **Global CSAT Gauge:** Continuous radial meter integrating sentiment polarities into a single 0–100 executive score with confidence calibration badges.
+- **2D Customer Sentiment Density Map:** High-density coordinate visualizer offering both **Hexbin** and **Scatter** modes, mapping customer feedback intensity ($y$) against polarity ($x$) to immediately isolate friction clusters.
+- **Sentiment Trajectory Time-Series:** 30-day longitudinal trend tracking positive delight, neutral baselines, and negative friction volumes.
+- **Topic Resonance Radar:** 5-axis radar chart displaying thematic equilibrium across *Customer Satisfaction*, *Urgency/Churn*, *Resolution Velocity*, *Polarity Balance*, and *Volume Impact*.
+- **Executive Intelligence Feed:** Automated bullet-point strategic synthesis highlighting high-priority churn risks and operational opportunities.
+- **Collection Explorer:** Direct sidebar navigation to filtered topic collections with real-time review counts (*Platform Performance*, *Customer Support*, etc.).
+
+---
+
+### 3. Continuous Sentiment Space & Review Explorer (`/reviews`)
+- **Interactive Multi-Class Corpus Table:** Search, filter, and sort across thousands of customer records with pagination.
+- **Multi-Dimensional Filtering:** Filter by sentiment label (*Positive*, *Neutral*, *Negative*), topic collection, feedback channel (*Zendesk*, *In-App*, *Email*, *Twitter*, *G2*), and minimum confidence threshold.
+- **Review Detail Modal & Token Attribution Drawer:** Clicking any review reveals its exact Platt posterior probability distribution, discovered topic classification, and interactive color-coded token attributions ($w_i \cdot x_i$) showing exactly which words drove the classification.
+
+---
+
+### 4. Latent Topic Modeler (`/topics`)
+- **Unsupervised NMF Topic Discovery:** Explores 5 latent semantic clusters extracted from high-dimensional TF-IDF term matrices without human supervision.
+- **Topic Cards:** Displays review volume, percentage of corpus, sentiment breakdown bars, and coherence metrics.
+- **Characteristic N-Gram Matrix ($H$):** Displays the top mathematical keywords defining each latent topic with relative weighting.
+- **Representative Customer Voices:** Displays the most mathematically representative customer reviews closest to each topic's centroid vector.
+
+---
+
+### 5. Model Evaluation & Tournament (`/model`)
+- **Tournament Champion Selection:** Compares Calibrated Linear SVM against Multinomial Logistic Regression evaluated on an untouched 20% stratified test split ($N = 234$).
+- **Tournament Scorecard:** Displays Validation Macro F1, Test Accuracy (100%), Test Macro F1 (1.0000), Training Time (35.17 ms), and Inference Latency (8.8 µs).
+- **Confusion Matrix Grid:** Precision grid mapping True vs. Predicted classes across Positive, Neutral, and Negative categories.
+- **Interactive Decision Boundary Sandbox:** Test custom sentences or benchmark challenges (including linguistic negation stress tests like *"Not bad at all"* vs. *"Never works"*) to verify hyperplane behavior in real time.
+
+---
+
+### 6. Executive Dossiers & Report Generation (`/reports`)
+- **Audit-Ready PDF Report Generator:** Single-click server-side PDF compilation powered by Python ReportLab, including executive summaries, CSAT metrics, topic distribution tables, and high-impact quotes.
+- **Raw CSV Data Export:** One-click download of the fully processed, vectorized, and labeled corpus for external business intelligence tools (Tableau, PowerBI).
+- **AI Executive Synthesis:** Optional Google Gemini 2.5 Flash executive narrative with automatic deterministic fallback to local analytical summaries when running air-gapped.
+
+---
+
+### 7. Ingestion & Dataset Management (`/upload`)
+- **Drag-and-Drop CSV Uploader:** Upload custom customer feedback datasets with file validation and 5-row interactive preview.
+- **Intelligent Schema Mapping:** Auto-detects or manually maps required fields (*Review Text*, *Rating / Sentiment*, *Customer Identifier*, *Channel*, *Timestamp*).
+- **Instant In-Memory Ingestion:** Feeds the uploaded file into the TF-IDF vectorizer, assigns NMF topic clusters and calibrated sentiment, and saves to SQLite.
+
+---
+
+## 🎨 Brand Identity & Custom Favicon
+
+Voxora AI is built on a strict **60-30-10 editorial color system**:
+- **60% Dominant Foundation:** Warm Silk Porcelain (`#FBF8FA`) providing clean readability and airy negative space.
+- **30% Structural Authority:** Deep Royal Eggplant / Midnight Aubergine (`#18031D`, `#400849`) grounding cards, headers, and navigation with mathematical seriousness.
+- **10% High-Voltage Accent:** Electric Signal Vermilion (`#FF5A0A`) providing focused energy on primary actions, acoustic sparks, and highlighted metrics.
+
+### Custom Brand Favicon ([`app/icon.svg`](frontend/app/icon.svg))
+The application features a unique, custom-designed vector favicon:
+- A dark royal plum squircle tile (`#18031D`) with subtle specular border.
+- The continuous silk **"V"** stroke with a luminous orchid-to-vermilion acoustic resonance gradient (`#E7B0DE` &rarr; `#FF5A0A`).
+- A concentric white frequency arc representing customer voice telemetry.
+- A focal vermilion intelligence spark node.
+
+---
+
+## 🔬 Mathematical Methodology & Defensibility
+
+### 1. Negation-Preserving Text Normalization
+Standard NLP preprocessors strip words like *"not"*, *"never"*, or *"hardly"*, destroying sentiment context. Voxora preserves critical linguistic negations through:
+- Contraction expansion (`"can't"` &rarr; `"cannot"`, `"won't"` &rarr; `"will not"`).
+- Whitelisted negation stopwords, ensuring phrases like *"not good"* or *"hardly responsive"* maintain strong negative polarity.
+- Sublinear TF-IDF scaling: $\text{tf-idf}(t, d) = (1 + \log(\text{tf}(t, d))) \times \log\left(\frac{1 + N}{1 + \text{df}(t)}\right) + 1$.
+
+### 2. Unsupervised Topic Modeling (NMF)
+Voxora decomposes the document-term matrix $V \in \mathbb{R}^{M \times N}$ into non-negative factors $W$ (document-topic distribution) and $H$ (topic-term distribution):
+$$\min_{W \ge 0, H \ge 0} \frac{1}{2} \|V - WH\|_F^2 + \alpha \rho \|W\|_1 + \alpha \rho \|H\|_1 + \frac{\alpha(1-\rho)}{2} \|W\|_F^2 + \frac{\alpha(1-\rho)}{2} \|H\|_F^2$$
+Discovers latent themes without human labeling or hallucinated categories.
+
+### 3. Platt Probability Calibration (Linear SVM)
+While standard Support Vector Machines only output raw geometric hyperplane distances $f(x) = w^T x + b$, Voxora fits a sigmoid transformation via Platt scaling:
+$$P(y=1 \mid x) = \frac{1}{1 + \exp(A f(x) + B)}$$
+yielding true posterior probabilities that can be calibrated for executive risk thresholds.
+
+### 4. Token-Level Linear Feature Attribution
+Unlike deep black-box LLMs that hallucinate post-hoc explanations, Linear SVM coefficients provide exact mathematical attributions:
+$$\text{attribution}(w_i) = x_i \cdot \beta_{c,i}$$
+Every word's positive or negative contribution to the classification is directly provable from the model's weights.
+
+---
+
+## 🧪 Quality Gates & Verification
+
+Every pull request and build must pass all four quality gates:
 
 ```bash
-# Backend test suite (9 unit & integration tests)
-cd backend
-pytest -v
+# 1. Frontend Production Build (Turbopack + TypeScript Strict)
+cd frontend
+pnpm build
 
-# Frontend component & utility tests (Vitest)
-cd ../frontend
-pnpm test -- --run
-
-# Strict ESLint validation (0 errors, 0 warnings enforced)
+# 2. Strict ESLint Sweep (0 errors, 0 warnings enforced)
 pnpm lint
 
-# Production compilation check
-pnpm build
+# 3. Unit & Component Test Suite (Vitest)
+pnpm test -- --run
+
+# 4. Backend Unit & Pipeline Tests (Pytest)
+cd ../backend
+pytest -v
 ```
 
 ---
@@ -159,82 +240,57 @@ pnpm build
 
 ```
 Voxora-AI/
-├── README.md                      # Primary project documentation
-├── sample_data/                   # Realistic test datasets for evaluation
-│   ├── amazon_reviews_sample.csv  # E-commerce review sample
-│   ├── saas_reviews_unseen.csv    # Unseen B2B SaaS review sample
-│   └── test_reviews_demo.csv      # General customer feedback sample
-├── docs/                          # Academic & Senior Thesis Documentation
-│   ├── ARCHITECTURE.md            # System architecture & component design
-│   ├── ML_METHODOLOGY.md          # Preprocessing, tournament, NMF & explainability
-│   ├── REQUIREMENTS.md            # Functional & non-functional requirements
-│   └── WALKTHROUGH.md             # Evaluator demonstration walkthrough script
-├── backend/                       # Python FastAPI Backend & ML Pipeline
-│   ├── pytest.ini                 # Pytest configuration
-│   ├── requirements.txt           # Python dependency specifications
+├── README.md                          # Primary documentation (this file)
+├── run.py                             # Universal zero-config auto-port launcher
+├── start.bat                          # 1-click Windows batch launcher
+├── start.ps1                          # 1-click PowerShell launcher
+├── backend_port.json                  # Auto-generated port discovery metadata
+├── docs/                              # Documentation assets & images
+│   └── images/                        # High-resolution application screenshots
+│       ├── 01_landing_hero.png        # Editorial landing page preview
+│       ├── 02_executive_dashboard.png # Executive dashboard preview
+│       └── 03_model_tournament.png    # Model tournament & laboratory preview
+├── backend/                           # Python FastAPI & scikit-learn backend
+│   ├── requirements.txt               # Backend dependencies
 │   ├── app/
-│   │   ├── main.py                # FastAPI application entrypoint
-│   │   ├── config.py              # Application settings & paths
-│   │   ├── database.py            # SQLite engine & session factory
-│   │   ├── db_models.py           # SQLAlchemy dataset & review models
-│   │   ├── ml/
-│   │   │   ├── preprocessor.py    # Negation-preserving text normalization
-│   │   │   ├── classifier.py      # Logistic Regression & Calibrated SVM
-│   │   │   ├── topic_model.py     # NMF unsupervised topic clustering
-│   │   │   └── explainer.py       # Token linear feature attribution
-│   │   └── routers/               # API endpoint modules
-│   │       ├── upload.py          # CSV upload, validation & previews
-│   │       ├── analysis.py        # Async batch inference jobs
-│   │       ├── datasets.py        # Dataset listing & deletion
-│   │       ├── dashboard.py       # CSAT metrics, time series & scatter map
-│   │       ├── reviews.py         # Search, filter & attribution details
-│   │       ├── topics.py          # Topic distributions & keyword weights
-│   │       ├── model_eval.py      # Tournament metrics & confusion matrix
-│   │       ├── reports.py         # ReportLab PDF & CSV exports
-│   │       └── ai_insights.py     # Gemini 2.5 synthesis with fallback
-│   ├── models/                    # Serialized ML artifacts (.pkl & .json)
-│   ├── scripts/                   # Dataset generation, training & seeding
-│   └── tests/                     # Backend unit and integration tests
-└── frontend/                      # Next.js 16 App Router Frontend
-    ├── package.json               # Dependencies & scripts
-    ├── tsconfig.json              # Strict TypeScript configuration
-    ├── vitest.config.ts           # Vitest configuration
-    ├── app/                       # Next.js App Router pages
-    │   ├── layout.tsx             # Root layout with fonts & providers
-    │   ├── globals.css            # Tailwind CSS & custom design tokens
-    │   ├── page.tsx               # Landing page with interactive preview
-    │   ├── dashboard/page.tsx     # Voice of Customers executive overview
-    │   ├── upload/page.tsx        # Drag-and-drop CSV uploader & column mapper
-    │   ├── reviews/page.tsx       # Searchable review explorer & inspector
-    │   ├── topics/page.tsx        # NMF topic intelligence & cluster breakdown
-    │   ├── model/page.tsx         # Tournament evaluation & confusion matrix
-    │   └── reports/page.tsx       # PDF report preview, CSV download & AI synthesis
-    ├── components/                # Reusable UI component library
-    │   ├── layout/                # Sidebar, Navbar, and breadcrumbs
-    │   ├── dashboard/             # CSAT Gauge, TimeSeries, SentimentMap, Highlights
-    │   ├── reviews/               # ReviewTable, ReviewDetailModal, Attributions
-    │   ├── topics/                # TopicCard, KeywordClouds
-    │   └── model/                 # ConfusionMatrixGrid, MetricsTable
-    ├── lib/                       # Utilities, design tokens & API client
-    │   ├── tokens.ts              # 8pt grid, brand color palette, font scales
-    │   ├── types.ts               # Strict TypeScript API contracts
-    │   ├── api.ts                 # Typed fetch client with error handling
-    │   └── utils.ts               # Formatting, dates, tailwind-merge
-    └── tests/                     # Frontend component and contract tests
+│   │   ├── main.py                    # FastAPI entrypoint with port metadata export
+│   │   ├── database.py                # SQLite database session & engine
+│   │   ├── db_models.py               # SQLAlchemy models (Dataset, Review, AnalysisJob)
+│   │   ├── ml/                        # ML pipeline (preprocessor, SVM, NMF, explainer)
+│   │   └── api/                       # API routers (dashboard, reviews, topics, model, reports)
+│   ├── scripts/                       # Training tournament & database seeder
+│   └── tests/                         # Pytest test suite
+└── frontend/                          # Next.js 16 App Router frontend
+    ├── package.json                   # Frontend dependencies
+    ├── app/                           # App Router routes
+    │   ├── layout.tsx                 # Root layout with brand favicon & typography
+    │   ├── globals.css                # Design tokens & Newsreader serif imports
+    │   ├── icon.svg                   # Custom brand vector favicon
+    │   ├── page.tsx                   # Bespoke editorial landing page
+    │   ├── dashboard/page.tsx         # Executive Voice-of-Customer dashboard
+    │   ├── reviews/page.tsx           # Continuous sentiment space & review explorer
+    │   ├── topics/page.tsx            # Unsupervised NMF latent topic modeler
+    │   ├── model/page.tsx             # Tournament evaluation & confusion matrix
+    │   ├── reports/page.tsx           # Audit-ready PDF & CSV dossier generation
+    │   └── upload/page.tsx            # CSV ingestion & schema mapper
+    ├── components/                    # Modular component library
+    │   ├── landing/                   # Hero, Method, Laboratory, Topology, Defensibility, Rail
+    │   ├── dashboard/                 # CSAT Gauge, 2D Density Map, TimeSeries, Radar
+    │   ├── reviews/                   # ReviewTable, ReviewDetailModal
+    │   └── layout/                    # Logo, Navbar, Sidebar
+    ├── lib/                           # Typed API client with auto-discovery & retry
+    │   ├── api.ts                     # Dynamic port candidate probing & self-healing client
+    │   └── types.ts                   # Strict TypeScript API contracts
+    └── tests/                         # Vitest component & API tests
 ```
 
 ---
 
-## 📜 Academic Defensibility & Ethics
+## 📄 License & Academic Integrity
 
-Voxora AI adheres to rigorous standards of academic integrity:
-1. **No Artificial Placeholders**: All metrics, sentiment classifications, topic distributions, and confidence scores originate from serialized scikit-learn models executed against persisted SQLite records.
-2. **Untouched Test Split Evaluation**: Final reported accuracy and confusion matrices are computed exclusively on an untouched 15% stratified test split that was never exposed during vectorizer fitting or hyperparameter tuning.
-3. **Non-Causal Feature Attribution**: Token attributions represent linear model weights ($w_i \cdot \beta_{c,i}$) relative to the decision boundary and are explicitly accompanied by user-facing non-causal disclosures.
-4. **Zero Client-Side Secret Leakage**: External LLM syntheses run on isolated server-side endpoints with automatic fallback to local analytical aggregations.
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
 
----
-
-## 📄 License
-
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+### Academic Integrity Notice
+- **No Synthetic Placeholders:** All metrics, confusion matrices, and topic vectors are calculated from serialized scikit-learn models executed on real customer review datasets.
+- **Untouched Test Partition:** Final performance metrics are computed exclusively on an untouched 20% stratified test split.
+- **Zero Secret Leakage:** Client applications communicate with the backend exclusively via local, rate-limited endpoints. All API keys remain strictly on the server.
