@@ -5,14 +5,14 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Voxora AI — Customer Feedback Intelligence Platform",
   description:
-    "Defensible customer sentiment classification, NMF topic modeling, and token-level explainability for enterprise customer intelligence.",
+    "Understand customer sentiment, discover recurring topics, and turn feedback into clearer decisions with Voxora AI.",
   keywords: ["customer feedback", "sentiment analysis", "topic modeling", "NMF", "FastAPI", "Next.js"],
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },
     ],
     shortcut: "/icon.svg",
-    apple: "/icon.svg",
+    apple: "/apple-touch-icon.png",
   },
 };
 

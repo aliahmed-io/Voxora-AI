@@ -1,88 +1,16 @@
-"use client";
-
-import React from "react";
-import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { Logo } from "@/components/layout/Logo";
-import { LandingRail } from "@/components/landing/LandingRail";
-import { LandingHero } from "@/components/landing/LandingHero";
-import { LandingMethod } from "@/components/landing/LandingMethod";
-import { LandingLaboratory } from "@/components/landing/LandingLaboratory";
-import { LandingTopology } from "@/components/landing/LandingTopology";
-import { LandingDefensibility } from "@/components/landing/LandingDefensibility";
-import { LandingDatasets } from "@/components/landing/LandingDatasets";
-import { LandingCta } from "@/components/landing/LandingCta";
-
-export default function LandingPage() {
-  return (
-    <div className="min-h-screen bg-[#FBF8FA] text-[#26052B] flex flex-col font-sans selection:bg-[#FF5A0A]/20">
-      {/* 1. Left Architectural Navigation Rail (Visible on XL screens) */}
-      <LandingRail />
-
-      {/* 2. Global Editorial Top Navigation */}
-      <header className="h-20 border-b border-[#400849]/10 bg-[#FBF8FA]/85 backdrop-blur-md px-6 sm:px-12 lg:px-16 xl:pl-24 flex items-center justify-between sticky top-0 z-30 transition-all">
-        <Link href="/" className="group">
-          <Logo size="md" />
-        </Link>
-
-        {/* Minimalist Editorial Navigation */}
-        <nav className="hidden lg:flex items-center gap-8 text-xs font-semibold tracking-wide text-[#6B3075]">
-          <a href="#method" className="hover:text-[#26052B] transition-colors">
-            The Method
-          </a>
-          <a href="#laboratory" className="hover:text-[#26052B] transition-colors flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF5A0A] animate-pulse" />
-            <span>Laboratory</span>
-          </a>
-          <a href="#topology" className="hover:text-[#26052B] transition-colors">
-            Latent Topology
-          </a>
-          <a href="#defensibility" className="hover:text-[#26052B] transition-colors">
-            Defensibility
-          </a>
-          <a href="#datasets" className="hover:text-[#26052B] transition-colors">
-            Workspaces
-          </a>
-        </nav>
-
-        {/* Action Header Links */}
-        <div className="flex items-center gap-5">
-          <Link
-            href="/dashboard"
-            className="hidden sm:inline-flex text-xs font-semibold text-[#6B3075] hover:text-[#26052B] transition-colors items-center gap-1"
-          >
-            <span>Open workspace</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </Link>
-
-          <Link
-            href="/dashboard"
-            className="px-5 py-2.5 rounded-full bg-[#400849] hover:bg-[#2F0536] text-white text-xs font-semibold tracking-wide shadow-sm transition-all hover:scale-105 flex items-center gap-2 group"
-          >
-            <span>Launch Studio</span>
-            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </div>
-      </header>
-
-      {/* 3. Main Landing Canvas (Framed with Left Margin on XL) */}
-      <main className="flex-1 xl:pl-16">
-        <div id="hero">
-          <LandingHero />
-        </div>
-
-        <LandingMethod />
-
-        <LandingLaboratory />
-
-        <LandingTopology />
-
-        <LandingDefensibility />
-
-        <LandingDatasets />
-
-        <LandingCta />
-      </main>
-    </div>
-  );
-}
+import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
+import { Logo } from '@/components/layout/Logo';
+import './landing.css';
+import { HexField } from '@/components/landing/HexField';
+export default function LandingPage(){return <div className="landing">
+<header className="wrap"><Link href="/" aria-label="Voxora home"><Logo/></Link><nav><a href="#product">Product</a><a href="#workflow">How it works</a><a href="#questions">Questions</a></nav><Link className="outline" href="/dashboard">Open workspace <ArrowUpRight size={16}/></Link></header>
+<main><section className="hex-hero"><div className="hero-copy"><p className="eyebrow"><span className="tiny-hex"/> A thousand voices. One clear picture.</p><h1>See the<br/>whole<br/><span>story.</span></h1><p className="lead">Behind every review is a signal. Connect them to discover what’s working, what’s hurting, and what comes next.</p><div className="actions"><Link className="button" href="/upload">Find your patterns <ArrowUpRight size={18}/></Link><a href="#product">Explore Voxora ↘</a></div><p className="hero-footnote">Built for the people behind better customer experiences.</p></div><HexField/><div className="hero-edition"><span>Voxora / Customer intelligence</span><a href="#product">Scroll to connect the dots ↓</a></div></section>
+<div className="connected-story">
+<section className="story-overview" id="product"><div className="story-heading wrap"><p className="eyebrow">Follow the signal</p><h2>A thousand details.<br/>One revealing view.</h2><p>Step back from individual reviews.<br/>See the sentiment, the trends, and the topics together.</p></div><div className="dashboard-hex"><div className="dashboard-orbit" aria-hidden="true"/><div className="dashboard-window"><div className="dashboard-caption"><span>Inside Voxora</span><span>Sample workspace</span></div><img src="/dashboard-preview.png" width="1240" height="815" alt="Voxora dashboard showing sentiment, topic patterns and customer feedback trends" loading="lazy"/></div></div><Link className="story-link" href="/dashboard">Step inside the dashboard <ArrowUpRight size={20}/></Link><div className="connection-thread" aria-hidden="true"><i/></div></section>
+<section className="story-friction"><div className="massive-hex"><div><span className="hex-small-label">Beneath the surface</span><p>One complaint<br/>is a moment.<br/><em>A pattern<br/>is a signal.</em></p><span className="hex-small-label">See what keeps coming up.</span></div></div><div className="friction-copy"><p className="eyebrow">Connect the conversation</p><h2>Find the thing<br/>behind<br/>the things.</h2><p>A slow checkout. A confusing update. The same question, asked again. Discover the topics that connect individual experiences.</p><Link href="/topics">Explore recurring topics <ArrowUpRight size={20}/></Link><div className="topic-constellation" aria-label="Example feedback topics"><span>Support</span><span>Usability</span><span>Features</span></div><small>Illustrative topics</small></div></section>
+<section className="story-evidence"><div className="wrap evidence-grid"><div><p className="eyebrow">Keep the human in the picture</p><h2>Behind the data.<br/>Someone<br/><em>said this.</em></h2><p>Go from a pattern to the actual words behind it. Read individual reviews and explore what influenced the sentiment prediction.</p><Link href="/reviews">Read between the data points <ArrowUpRight size={20}/></Link></div><div className="quote-hex"><div><span>Illustrative customer feedback</span><blockquote>“I love what it does.<br/>I just wish it were<br/>easier to get there.”</blockquote><div className="quote-tags"><span>Product value</span><span>Usability friction</span></div><p>One voice. More than one insight.</p></div></div></div></section>
+<section className="story-path" id="workflow"><div className="wrap"><p className="eyebrow">Your next move</p><h2>Bring the voices.<br/>Leave with direction.</h2><div className="path-steps">{[['Bring your feedback.','Upload your review data and choose the text you want to understand.'],['Connect the patterns.','Explore sentiment, topics, and the individual reviews behind them.'],['Share the picture.','Bring the dashboard and reports into your next team decision.']].map(([title,text],i)=><article key={title}><span className="path-marker">0{i+1}</span><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>
+</div>
+<section className="faq wrap" id="questions"><div><p className="eyebrow">A few things to know</p><h2>Clarity starts here.</h2></div><div>{[['What can I do with Voxora?','Analyze customer feedback for sentiment and topics, inspect individual reviews, and explore results through dashboards and reports.'],['Where should I start?','Open the workspace to explore the dashboard, or select “Explore your feedback” to upload your own review data.'],['Can I look beyond the overall score?','Yes. Explore topics and individual reviews for context, and use the model workspace to inspect how text influences sentiment predictions.']].map(([q,a])=><details key={q}><summary>{q}<span>+</span></summary><p>{a}</p></details>)}</div></section>
+<section className="connected-close"><div className="close-hex" aria-hidden="true"/><div className="wrap"><p className="eyebrow">The story doesn’t end here.</p><h2>Make the<br/>next connection.</h2><Link className="button" href="/upload">Explore your feedback <ArrowUpRight size={20}/></Link><p>Start with the voices you already have.</p></div></section></main><footer className="wrap"><Logo size="sm"/><span>Customer voices. Clearer decisions.</span><Link href="/dashboard">Open workspace ↗</Link></footer></div>}

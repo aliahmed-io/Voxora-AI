@@ -11,7 +11,7 @@ import { Logo } from "@/components/layout/Logo";
 describe("Dashboard Components & Custom Logo", () => {
   it("renders custom SVG Logo component with trademark geometric mark", () => {
     const { container } = render(<Logo size="md" />);
-    expect(screen.getByText("Voxora")).toBeInTheDocument();
+    expect(screen.getByText("voxora")).toBeInTheDocument();
     expect(screen.getByText("AI")).toBeInTheDocument();
     expect(container.querySelector("svg")).toBeInTheDocument();
   });

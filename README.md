@@ -15,10 +15,12 @@ Engineered with a **100% on-premise scikit-learn machine learning pipeline**, Vo
 
 ## 📸 Visual Showcase
 
-### 1. Bespoke Editorial Landing Page & Sensor Telemetry
-> Architectural left navigation rail, high-contrast editorial serif typography (`Newsreader`), live illustrative sensor waveforms, and real-time streaming feedback telemetry.
+### 1. Connected Hexagon Landing Page
+> A full-width plum hero, interactive honeycomb sentiment illustration, and oversized hexagonal compositions connect the product story from first impression to upload.
 
-![Voxora AI Editorial Landing Page](docs/images/01_landing_hero.png)
+![Voxora AI hexagon landing page](docs/images/01_landing_hero.png)
+
+[View the complete landing-page design](docs/images/04_landing_full.png)
 
 ---
 
@@ -111,18 +113,12 @@ pnpm start -- -p 3004
 ## ✨ Page-by-Page Feature Tour
 
 ### 1. Landing Page (`/`)
-- **Architectural Left Rail:** A fixed 56px margin rail featuring the brand monogram `V•`, vertical `VOXORA INTELLIGENCE` tracking, dynamic section index (`01` through `06`), and scroll indicator.
-- **Monumental Headline & Luxury Typography:** High-contrast `Newsreader` italic serif display headline (*"Every customer voice, quantified."*), conveying mathematical rigor and executive elegance.
-- **Illustrative Telemetry Instruments:** Real-time visual instruments including CSAT Harmonic frequency waveform (`78.4 / 100`), Inference Velocity sparkline (`< 0.12 ms`), and Platt Calibration percentage dial (`96.8%`).
-- **Asymmetric Perspective Instrument:** Deep midnight aubergine split panel showcasing live feedback signal cards, continuous 2D coordinate projections, and SVM hyperplane weight inspections.
-- **The Voxora Method:** 3 horizontal editorial steps:
-  1. *Observe:* In-memory text normalization and sublinear TF-IDF n-gram vectorization with zero cloud egress.
-  2. *Decompose:* Non-Negative Matrix Factorization (NMF) discovering latent clusters without manual labeling, combined with Platt-calibrated Linear SVM.
-  3. *Anticipate:* Continuous 2D geometric projection onto friction/delight planes and automated executive boardroom dossiers.
-- **Real-Time Inference Laboratory:** Interactive console with 4 enterprise scenarios (*Outage & Churn Risk*, *Enterprise Migration Delight*, *Support SLA Breach*, *Subscription Transparency*). Executes against the live backend in `< 10ms` to display 3-class Platt probabilities and token weights.
-- **Latent Theme Topology:** Interactive cluster browser for 5 unsupervised customer themes, displaying volume, sentiment ratios, key n-grams, and representative quotes.
-- **Defensibility Matrix:** Rigorous comparison contrasting Voxora AI against Cloud LLMs (GPT-4 / Claude) and Lexicon Rules across determinism, latency, privacy, feature attribution, and cost.
-- **Curated Workspaces:** Instant 1-click launch into pre-loaded enterprise corpora (*Voxora SaaS*, *E-Commerce*, *Fintech Banking*).
+- **Bold opening:** “See the whole story.” combines oversized typography with a sweeping lilac and orange honeycomb on a plum canvas.
+- **Interactive sentiment illustration:** Switch between the whole picture, friction, and delight. These clusters are illustrative, not live analytics or customer data.
+- **Connected product tour:** A dashboard preview framed by a giant hexagon leads into a half-screen orange topic section, a hexagonal customer-quote illustration, and a three-step workflow.
+- **Continuous visual transitions:** Angled section edges, connecting lines, and shared colors carry the story through the page. Supported browsers gently level the dashboard preview as it scrolls into view.
+- **Accessible interaction:** Responsive layouts, visible focus states, native expandable FAQs, and reduced-motion support. No scroll hijacking or mandatory animation.
+- **Direct product access:** Links open the dashboard, topic explorer, review explorer, or feedback upload. The landing page renders without the analysis backend; product data and analysis require the backend.
 
 ---
 
@@ -175,17 +171,36 @@ pnpm start -- -p 3004
 
 ## 🎨 Brand Identity & Custom Favicon
 
-Voxora AI is built on a strict **60-30-10 editorial color system**:
-- **60% Dominant Foundation:** Warm Silk Porcelain (`#FBF8FA`) providing clean readability and airy negative space.
-- **30% Structural Authority:** Deep Royal Eggplant / Midnight Aubergine (`#18031D`, `#400849`) grounding cards, headers, and navigation with mathematical seriousness.
-- **10% High-Voltage Accent:** Electric Signal Vermilion (`#FF5A0A`) providing focused energy on primary actions, acoustic sparks, and highlighted metrics.
+The visual identity grows out of the dashboard’s hexagonal sentiment map:
 
-### Custom Brand Favicon ([`app/icon.svg`](frontend/app/icon.svg))
-The application features a unique, custom-designed vector favicon:
-- A dark royal plum squircle tile (`#18031D`) with subtle specular border.
-- The continuous silk **"V"** stroke with a luminous orchid-to-vermilion acoustic resonance gradient (`#E7B0DE` &rarr; `#FF5A0A`).
-- A concentric white frequency arc representing customer voice telemetry.
-- A focal vermilion intelligence spark node.
+- **Deep plum (`#400849`):** Immersive hero and insight sections.
+- **Lilac (`#EDDAEF`) and pale pink (`#FCF7FC`):** Connected reading surfaces and transitions.
+- **Signal orange (`#FF7837`, `#FF5A0A`):** Large hexagonal compositions, highlighted clusters, and primary actions.
+- **Typography:** Inter and Plus Jakarta Sans paired with Newsreader for expressive display accents.
+
+### Logo and favicon
+The shared logo uses a plum hexagon, a white V, and a smaller orange hexagonal signal. Matching assets include the SVG favicon, multi-size ICO, and Apple touch icon:
+
+- [`Logo.tsx`](frontend/components/layout/Logo.tsx)
+- [`app/icon.svg`](frontend/app/icon.svg)
+- [`app/favicon.ico`](frontend/app/favicon.ico)
+- [`apple-touch-icon.png`](frontend/public/apple-touch-icon.png)
+
+### Landing-page development
+
+```bash
+cd frontend
+npm install
+node node_modules/next/dist/bin/next dev --webpack --port 3015
+```
+
+Open [localhost:3015](http://localhost:3015). For a production check using Webpack:
+
+```bash
+node node_modules/next/dist/bin/next build --webpack
+```
+
+The landing page is implemented in [`app/page.tsx`](frontend/app/page.tsx), [`app/landing.css`](frontend/app/landing.css), and [`HexField.tsx`](frontend/components/landing/HexField.tsx). Its dashboard preview and example quotes are illustrative. The dashboard itself remains available at `/dashboard`.
 
 ---
 
@@ -247,7 +262,7 @@ Voxora-AI/
 ├── backend_port.json                  # Auto-generated port discovery metadata
 ├── docs/                              # Documentation assets & images
 │   └── images/                        # High-resolution application screenshots
-│       ├── 01_landing_hero.png        # Editorial landing page preview
+│       ├── 01_landing_hero.png        # Hexagon landing page preview
 │       ├── 02_executive_dashboard.png # Executive dashboard preview
 │       └── 03_model_tournament.png    # Model tournament & laboratory preview
 ├── backend/                           # Python FastAPI & scikit-learn backend
@@ -266,7 +281,7 @@ Voxora-AI/
     │   ├── layout.tsx                 # Root layout with brand favicon & typography
     │   ├── globals.css                # Design tokens & Newsreader serif imports
     │   ├── icon.svg                   # Custom brand vector favicon
-    │   ├── page.tsx                   # Bespoke editorial landing page
+    │   ├── page.tsx                   # Connected hexagon landing page
     │   ├── dashboard/page.tsx         # Executive Voice-of-Customer dashboard
     │   ├── reviews/page.tsx           # Continuous sentiment space & review explorer
     │   ├── topics/page.tsx            # Unsupervised NMF latent topic modeler
@@ -274,7 +289,7 @@ Voxora-AI/
     │   ├── reports/page.tsx           # Audit-ready PDF & CSV dossier generation
     │   └── upload/page.tsx            # CSV ingestion & schema mapper
     ├── components/                    # Modular component library
-    │   ├── landing/                   # Hero, Method, Laboratory, Topology, Defensibility, Rail
+    │   ├── landing/                   # Interactive HexField and legacy landing components
     │   ├── dashboard/                 # CSAT Gauge, 2D Density Map, TimeSeries, Radar
     │   ├── reviews/                   # ReviewTable, ReviewDetailModal
     │   └── layout/                    # Logo, Navbar, Sidebar
@@ -291,6 +306,6 @@ Voxora-AI/
 This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
 
 ### Academic Integrity Notice
-- **No Synthetic Placeholders:** All metrics, confusion matrices, and topic vectors are calculated from serialized scikit-learn models executed on real customer review datasets.
+- **Illustrations vs. analysis:** Landing-page clusters, quotes, and the dashboard screenshot are illustrative previews. Product analysis is produced by the backend from the selected dataset; illustrative content is not evidence of model performance.
 - **Untouched Test Partition:** Final performance metrics are computed exclusively on an untouched 20% stratified test split.
 - **Zero Secret Leakage:** Client applications communicate with the backend exclusively via local, rate-limited endpoints. All API keys remain strictly on the server.
